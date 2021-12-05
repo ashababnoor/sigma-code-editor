@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <link rel="stylesheet" href="codemirror-5.64.0/lib/codemirror.css">
+    <script src="codemirror-5.64.0/mode/javascript/javascript.js"></script>
+
+    <title>Sigma Code Editor</title>
 </head>
 <body>
-    
+    <script>
+        var myCodeMirror = CodeMirror(document.body, {
+  value: "function myScript(){return 100;}\n",
+  mode:  "javascript"
+});
+    </script>
 </body>
 </html>
