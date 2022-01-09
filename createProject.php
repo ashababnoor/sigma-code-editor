@@ -67,7 +67,7 @@ if(
                 location.assign(url);
                 alert("Data not set properly!");
             </script>
-        <?php   
+        <?php
     }
 }
 else{
