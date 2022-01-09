@@ -6,13 +6,13 @@ SigmaCodePro is a versatile online code and text editor.
 #### Software Engineering Laboratory
 <br>
 
+> Project Name	: SigmaCodePro <br>
+>
 > | Student's Name            | Student ID  |
 > |---------------------------|-------------|
 > | Ahmed Shabab Noor         | 011 193 024 |
 > | Jubaer Ahmad              | 011 181 023 |
 > | Fahim Al Awsaf            | 011 181 253 |
 > | Md. Imtiaz Hossain Shovon | 011 143 129 |
->
-> Project Name	: SigmaCodePro <br>
 
 <br>
