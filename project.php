@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="codemirror-5.64.0/lib/codemirror.css">
     <link rel="stylesheet" href="codemirror-5.64.0/theme/darcula.css">
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
 
     <script src="codemirror-5.64.0/mode/javascript/javascript.js"></script>
 
@@ -42,6 +43,34 @@
         }
         body{
             background: #343a40;
+        }
+
+        /* sidebar file create */
+
+        #sidebar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 18%;
+            height: 100vh;
+        }
+        #editor {
+            position: absolute;
+            left: 18%;
+            top: 0;
+            width: 82%;
+            height: 100vh;
+        }
+        .file {
+            width: 100%;
+            padding: 10px;
+            padding: 29px;
+            box-sizing: border-box;
+            background-position: 5px center;
+            background-repeat: no-repeat;
+            background-size: 24px 24px;
+            color: #67e685;
+            
         }
     </style>
 </head>
@@ -115,8 +144,19 @@
             </div>
         </div>
     </div>
+    
     <div class="ui bottom attached segment">
-        <textarea name="" id="myTextarea" cols="30" rows="10"></textarea>
+        <div id="sidebar">
+            <div id="files">
+                <div class="file" style="background-image: url(file_img/html.png);">test.html</div>
+                <div class="file" style="background-image: url(file_img/css.png);">test.css</div>
+                <div class="file" style="background-image: url(file_img/javascript.png);">test.js</div>
+                <div class="file" style="background-image: url(file_img/txt.png);">test.txt</div>
+            </div>
+        </div>
+        <div id="editor">
+            <textarea name="" id="myTextarea" cols="30" rows="10">I am jubaer</textarea>
+        </div>
     </div>
     
     <script src="bootstrap-4.1.3/js/bootstrap.min.js"></script>

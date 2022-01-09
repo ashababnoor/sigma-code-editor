@@ -293,3 +293,15 @@ h4 {
 .paginate_button:last-of-type {
     margin-right: 0.25rem;
 }
+
+.file {
+    width: 100%;
+    padding: 10px;
+    padding: 44px;
+    box-sizing: border-box;
+    background-position: 5px center;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    background-image: url();
+    color: #67e685;
+}
