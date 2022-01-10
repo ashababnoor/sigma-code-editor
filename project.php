@@ -106,7 +106,7 @@
             Settings
         </div>
         <div class="button-container">
-        <button class="btn" onclick="executeCode()"> Run </button>
+        <button class="btn" onclick="download()"> Download </button>
         </div>
         <div class="right menu">
             <div class="ui right aligned category search item">
@@ -119,8 +119,11 @@
         </div>
     </div>
     <div class="ui bottom attached segment">
+        
         <textarea name="myTextarea" id="myTextarea" cols="30" rows="10"> </textarea>
     </div>
+    
+    
     
     <script src="bootstrap-4.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
@@ -141,24 +144,35 @@
         });
         editor.setSize("100%", "80vh");
 
-        function executeCode() {
-            let txt =  $("span[role='presentation']").text();
-            console.log(txt);
-            $.ajax({
+        function download() {
+            let text=$("span[role='presentation']").text();
+            let filename = window.prompt("Enter file name: ");
+            let element = document.createElement('a');
+            if (filename.search(".html")) {
+                element.setAttribute('href', 'data:html/plain;charset=utf-8,' + encodeURIComponent(text));
+                
+            }
+            else if (filename.search(".php")) {
+                element.setAttribute('href', 'data:php/plain;charset=utf-8,' + encodeURIComponent(text));
+                
+            }
+            else {
+                element.setAttribute('href', 'data:txt/plain;charset=utf-8,' + encodeURIComponent(text));
+                
+            }
+            
+            element.setAttribute('download', filename);
 
-                url: "app/compiler.php",
+            element.style.display = 'none';
+            document.body.appendChild(element);
 
-                method: "POST",
+            element.click();
 
-                data: {
-                    code: txt
-                },
+            document.body.removeChild(element);
+        }
 
-                success: function(response) {
-                    $(".output").text(response)
-                }
-            })
-    }
+
+
     </script>
 </body>
 
