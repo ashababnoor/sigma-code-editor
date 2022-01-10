@@ -14,13 +14,20 @@
     <script src="codemirror-5.64.0/mode/xml/xml.js"></script>
 
     <link rel="stylesheet" href="codemirror-5.64.0/lib/codemirror.css">
-    <link rel="stylesheet" href="codemirror-5.64.0/theme/darcula.css">
+    <link rel="stylesheet" href="codemirror-5.64.0/theme/dracula.css">
 
     <script src="codemirror-5.64.0/mode/javascript/javascript.js"></script>
+    <script src="codemirror-5.64.0/mode/css/css.js"></script>
 
     <script src="codemirror-5.64.0/addon/edit/closetag.js"></script>
 
     <link rel="stylesheet" href="bootstrap-4.1.3/css/bootstrap.min.css">
+
+    
+    <script src="codemirror-5.64.0/addon/hint/show-hint.js"></script>
+    <script src="codemirror-5.64.0/addon/hint/css-hint.js"></script>
+
+    <link rel="stylesheet" href="codemirror-5.64.0/addon/hint/show-hint.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <title>Home | SigmaCodePro</title>
@@ -131,10 +138,12 @@
         // });
         var editor = CodeMirror.fromTextArea(myTextarea, {
             value: "<h1> Hello World! </h1>",
-            mode: 'xml',
-            theme: 'darcula',
+            mode: 'css',
+            theme: 'dracula',
             lineNumbers: true,
             autoCloseTags: true,
+            tabSize: 4,
+            extraKeys: {"Ctrl-Space" : "autocomplete"},
         });
         editor.setSize("100%", "80vh")
     </script>
