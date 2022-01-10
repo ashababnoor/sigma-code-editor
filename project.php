@@ -105,6 +105,9 @@
         <div class="ui item">
             Settings
         </div>
+        <div class="button-container">
+        <button class="btn" onclick="executeCode()"> Run </button>
+        </div>
         <div class="right menu">
             <div class="ui right aligned category search item">
                 <div class="ui transparent icon input">
@@ -116,7 +119,7 @@
         </div>
     </div>
     <div class="ui bottom attached segment">
-        <textarea name="" id="myTextarea" cols="30" rows="10"></textarea>
+        <textarea name="myTextarea" id="myTextarea" cols="30" rows="10"> </textarea>
     </div>
     
     <script src="bootstrap-4.1.3/js/bootstrap.min.js"></script>
@@ -136,7 +139,26 @@
             lineNumbers: true,
             autoCloseTags: true,
         });
-        editor.setSize("100%", "80vh")
+        editor.setSize("100%", "80vh");
+
+        function executeCode() {
+            let txt =  $("span[role='presentation']").text();
+            console.log(txt);
+            $.ajax({
+
+                url: "app/compiler.php",
+
+                method: "POST",
+
+                data: {
+                    code: txt
+                },
+
+                success: function(response) {
+                    $(".output").text(response)
+                }
+            })
+    }
     </script>
 </body>
 
