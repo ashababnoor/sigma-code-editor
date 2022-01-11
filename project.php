@@ -119,11 +119,11 @@
         </div>
     </div>
     <div class="ui bottom attached segment">
-        
+        <input type="file">
         <textarea name="myTextarea" id="myTextarea" cols="30" rows="10"> </textarea>
     </div>
     
-    
+    <script src="upload.js">  </script>
     
     <script src="bootstrap-4.1.3/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
