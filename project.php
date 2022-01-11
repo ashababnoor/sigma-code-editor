@@ -60,17 +60,21 @@
             top: 0;
             width: 82%;
             height: 100vh;
+            font-size: 15px;
+            line-height: 1.2em;
         }
         .file {
             width: 100%;
-            padding: 10px;
+            padding: 8px;
             padding-left: 44px;
             box-sizing: border-box;
             background-position: 10px center;
             background-repeat: no-repeat;
             background-size: 24px 24px;
-            color: #67e685;
-            
+            color: #88e29d;
+        }
+        .file:hover {
+            background-color: rgba(156, 156, 202, 0.3);
         }
     </style> 
 </head>
@@ -148,9 +152,8 @@
     <div class="ui bottom attached segment">
         <div id="sidebar">
             <div id="files">
-            <div class="file" style="background-image: url(file_img/html.png);">test.html</div>
-                
-                <div class="file" style="background-image: url(file_img/file.png);">test</div>
+                <div class="file" style="background-image: url(file_img/file.png);">test</div>                
+                <div class="file" style="background-image: url(file_img/file.png);">test1</div>
                 <div class="file" style="background-image: url(file_img/html.png);">test.html</div>
                 <div class="file" style="background-image: url(file_img/css.png);">test.css</div>
                 <div class="file" style="background-image: url(file_img/javascript.png);">test.js</div>

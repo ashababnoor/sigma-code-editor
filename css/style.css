@@ -294,6 +294,9 @@ h4 {
     margin-right: 0.25rem;
 }
 
+
+ /* edit */
+
 .file {
     width: 100%;
     padding: 10px;
@@ -303,6 +306,13 @@ h4 {
     background-repeat: no-repeat;
     background-size: 24px 24px;
     background-image: url();
-    color: #67e685;
+    color: #88e29d;
     padding-right: 20px;
+    text-shadow: 5px;
+    font-size: 15px;
+    line-height: 1.2em;
+}
+
+.file:hover {
+    background-color: rgba(0, 0, 255, 0.3);
 }
