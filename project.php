@@ -64,15 +64,15 @@
         .file {
             width: 100%;
             padding: 10px;
-            padding: 29px;
+            padding-left: 44px;
             box-sizing: border-box;
-            background-position: 5px center;
+            background-position: 10px center;
             background-repeat: no-repeat;
             background-size: 24px 24px;
             color: #67e685;
             
         }
-    </style>
+    </style> 
 </head>
 
 <body>
@@ -148,6 +148,9 @@
     <div class="ui bottom attached segment">
         <div id="sidebar">
             <div id="files">
+            <div class="file" style="background-image: url(file_img/html.png);">test.html</div>
+                
+                <div class="file" style="background-image: url(file_img/file.png);">test</div>
                 <div class="file" style="background-image: url(file_img/html.png);">test.html</div>
                 <div class="file" style="background-image: url(file_img/css.png);">test.css</div>
                 <div class="file" style="background-image: url(file_img/javascript.png);">test.js</div>
