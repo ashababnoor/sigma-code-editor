@@ -183,6 +183,10 @@
             autoCloseTags: true,
         });
         editor.setSize("100%", "80vh")
+
+        function post(url,data,callback) {
+            var xdr = new XML
+        }
     </script>
 </body>
 
