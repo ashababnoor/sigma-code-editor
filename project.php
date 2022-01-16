@@ -208,32 +208,36 @@
 
         // edit for adding file
         function post(url,data,callback) {
+            console.log(url);
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                callback(this.responseText);
+                    callback(this.responseText);
                 }
             };
-            xhr.open("POST", 'php/' + url, true);
+            xhr.open("POST", url, true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             if(typeof data === "object") {
                 var newObj = "";
                 for(var i in data) {
-                newObj += i + '=' + data[i];
-                if(Object.keys(data).indexOf(i) !== Object.keys(data).length-1) {
-                    newObj += "&";
-                }
+                    newObj += i + '=' + data[i];
+                    if(Object.keys(data).indexOf(i) !== Object.keys(data).length-1) {
+                        newObj += "&";
+                    }
                 }
                 data = newObj;
+        
             }
+            console.log(encodeURI(data));
             xhr.send(encodeURI(data));
         }
 
-        // function openFolder(folder) {
-        //     post("dir.php", {folder:folder}, function(data){
-        //         document.getElementById('files').innerHTML = data;
-        //     });
-        // }
+        function openFolder(folder) {
+            console.log("Yes333");
+            post("dir.php", {folder:folder}, function(data){
+                document.getElementById('files').innerHTML = data;
+            });
+        }
     </script>
 </body>
 
