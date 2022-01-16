@@ -17,7 +17,7 @@ function post(url,data,callback) {
         }
         data = newObj;
     }
-    xdr.send(data);
+    xdr.send(encodeURI(data));
 }
 
 function openFolder(folder) {

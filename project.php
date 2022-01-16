@@ -151,6 +151,13 @@
     
     <div class="ui bottom attached segment">
         <div id="sidebar">
+        <div class="row">
+            <div class="col-sm">Folder</div>
+            <div class="col-sm">
+            File
+            </div>
+            
+        </div>
             <div id="files">
                 <div class="file" style="background-image: url(file_img/file.png);">test</div>                
                 <div class="file" style="background-image: url(file_img/file.png);">test1</div>
@@ -182,10 +189,36 @@
             lineNumbers: true,
             autoCloseTags: true,
         });
-        editor.setSize("100%", "80vh")
+        editor.setSize("100%", "80vh");
+        openFolder("C:/xampp/htdocs/sigma-code-editor/file_img");
 
+        // edit for adding file
         function post(url,data,callback) {
-            var xdr = new XML
+            var xdr = new XMLHttpRequest();
+            xdr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    callback(this.responseText);
+                }
+            };
+            xdr.open("POST", 'php/' + url, true);
+            xdr.setRequestHeader("Content-type0", "application/x-www-from-urlencoded");
+            if(typeof data === "object") {
+                var newObj = "";
+                for(var i in data) {
+                    newObj += i + '=' + data[i];
+                    if(Object.keys(data).indexOf(i) !== Object.keys(data).length-1) {
+                        newObj += '&';
+                    }
+                }
+                data = newObj;
+            }
+            xdr.send(encodeURI(data));
+        }
+
+        function openFolder(folder) {
+            post("dir.php", {folder:folder}, function(data){
+                document.getElementById('files').innerHTML = data;
+            });
         }
     </script>
 </body>
