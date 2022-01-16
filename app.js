@@ -12,8 +12,15 @@ window.onload = () => {
     run.addEventListener('click', () => {
         const codeToRun = editor.getValue();
         
-        shell.replaceRange('$ ' + eval(`${codeToRun}`) + '\n', CodeMirror.Pos(shell.lastLine()));
+        try{
+            shell.replaceRange('$ ' + eval(`${codeToRun}`) + '\n', CodeMirror.Pos(shell.lastLine()));
+        }catch(error){
+            shell.replaceRange('$ ' + error + '\n', CodeMirror.Pos(shell.lastLine()));
+        }
+        
     });
-    //clear.addEventListener('click', () => console.log('clearing'));
+    clear.addEventListener('click', () => {
+        shell.setValue("");
+    });
 
 }
