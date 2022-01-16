@@ -9,6 +9,7 @@
     <link rel="shortcut icon" href="images/scp-logo-green.svg" type="image/x-icon">
 
     <script src="assets/library/jquery.min.js"></script>
+    <script src="js/script_pro.js"></script>
 
     <script src="codemirror-5.64.0/lib/codemirror.js"></script>
     <script src="codemirror-5.64.0/mode/xml/xml.js"></script>
@@ -89,7 +90,7 @@
     </style> 
 </head>
 
-<body>
+<body onload="load()">
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a href="home.php" class="navbar-brand"> <img src="images/scp-logo-green.svg" alt="SigmaCodePro" class="navbar-brand-image"> SigmaCodePro</a>
@@ -171,12 +172,12 @@
                 
             </div>
             <div id="files">
-                <div class="file" style="background-image: url(file_img/file.png);">test</div>                
+                <!-- <div class="file" style="background-image: url(file_img/file.png);">test</div>                
                 <div class="file" style="background-image: url(file_img/file.png);">test1</div>
                 <div class="file" style="background-image: url(file_img/html.png);">test.html</div>
                 <div class="file" style="background-image: url(file_img/css.png);">test.css</div>
                 <div class="file" style="background-image: url(file_img/javascript.png);">test.js</div>
-                <div class="file" style="background-image: url(file_img/txt.png);">test.txt</div>
+                <div class="file" style="background-image: url(file_img/txt.png);">test.txt</div> -->
             </div>
         </div>
         <div id="editor">
@@ -202,36 +203,37 @@
             autoCloseTags: true,
         });
         editor.setSize("100%", "80vh");
+        console.log("Yes");
         openFolder("C:/xampp/htdocs/sigma-code-editor/file_img");
 
         // edit for adding file
         function post(url,data,callback) {
-            var xdr = new XMLHttpRequest();
-            xdr.onreadystatechange = function() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
-                    callback(this.responseText);
+                callback(this.responseText);
                 }
             };
-            xdr.open("POST", 'php/' + url, true);
-            xdr.setRequestHeader("Content-type0", "application/x-www-from-urlencoded");
+            xhr.open("POST", 'php/' + url, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             if(typeof data === "object") {
                 var newObj = "";
                 for(var i in data) {
-                    newObj += i + '=' + data[i];
-                    if(Object.keys(data).indexOf(i) !== Object.keys(data).length-1) {
-                        newObj += '&';
-                    }
+                newObj += i + '=' + data[i];
+                if(Object.keys(data).indexOf(i) !== Object.keys(data).length-1) {
+                    newObj += "&";
+                }
                 }
                 data = newObj;
             }
-            xdr.send(encodeURI(data));
+            xhr.send(encodeURI(data));
         }
 
-        function openFolder(folder) {
-            post("dir.php", {folder:folder}, function(data){
-                document.getElementById('files').innerHTML = data;
-            });
-        }
+        // function openFolder(folder) {
+        //     post("dir.php", {folder:folder}, function(data){
+        //         document.getElementById('files').innerHTML = data;
+        //     });
+        // }
     </script>
 </body>
 
