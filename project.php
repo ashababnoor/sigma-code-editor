@@ -204,7 +204,7 @@
         });
         editor.setSize("100%", "80vh");
         console.log("Yes");
-        openFolder("C:/xampp/htdocs/sigma-code-editor/file_img");
+        openFolder("C:/xampp/htdocs/sigma-code-editor");
 
         // edit for adding file
         function post(url,data,callback) {

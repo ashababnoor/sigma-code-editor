@@ -1,5 +1,5 @@
 <?php
-    echo "hello";
+    // echo "hello";
     $dir = $_POST['folder'];
     $files = scandir($dir);
     // foreach($files as $file) {
@@ -14,6 +14,7 @@
         }
         $path = $dir . '/' . $file;
         if(is_dir($path)) {
+            // echo $file;
             echo '<div id="'.$path.'" onclick="openFolder(this.id)" class="file" style="background-image: url(file_img/file.png);">'.$file.'</div>';
         }
     }
@@ -23,7 +24,7 @@
             $path = $dir . '/' . $file;
             if(is_file($path)) {
                 $ext = pathinfo($path)['extension'];
-                echo $file;
+                // echo $file;
                 echo '<div id="'.$path.'" onclick="openFile(this.id)" class="file" style="background-image: url(file_img/'.$ext.'.png);">'.$file.'</div>';
             }
         }
