@@ -23,7 +23,8 @@
 
     <link rel="stylesheet" href="bootstrap-4.1.3/css/bootstrap.min.css">
 
-    
+    <script src="codemirror-5.64.0/addon/hint/show-hint.js"></script>
+
     <script src="codemirror-5.64.0/addon/hint/show-hint.js"></script>
     <script src="codemirror-5.64.0/addon/hint/css-hint.js"></script>
 
@@ -142,6 +143,7 @@
             theme: 'dracula',
             lineNumbers: true,
             autoCloseTags: true,
+            indentUnit: 4,
             tabSize: 4,
             extraKeys: {"Ctrl-Space" : "autocomplete"},
         });
