@@ -76,6 +76,16 @@
         .file:hover {
             background-color: rgba(156, 156, 202, 0.3);
         }
+        /* .folder {
+            width: 100%;
+            padding: 8px;
+            padding-left: 44px;
+            box-sizing: border-box;
+            background-position: 10px center;
+            background-repeat: no-repeat;
+            background-size: 24px 24px;
+            color: #88e29d;
+        } */
     </style> 
 </head>
 
@@ -151,13 +161,15 @@
     
     <div class="ui bottom attached segment">
         <div id="sidebar">
-        <div class="row">
-            <div class="col-sm">Folder</div>
-            <div class="col-sm">
-            File
+            <div class="row folder pl-3">
+                <div class="col-sm">
+                    <a href=createFolder.php>Folder</a>
+                </div>
+                <div class="col-sm">
+                    <a href=>File</a>
+                </div>
+                
             </div>
-            
-        </div>
             <div id="files">
                 <div class="file" style="background-image: url(file_img/file.png);">test</div>                
                 <div class="file" style="background-image: url(file_img/file.png);">test1</div>
