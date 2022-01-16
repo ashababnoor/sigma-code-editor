@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: azure;
+    width: 90%;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-gap: 20px;
+}
+
+.code-area {
+    background-color: white;
+    border-radius: 1rem;
+    
+}
+
+.code-area-header {
+    display: grid;
+    text-align: center;
+    grid-template-columns: 50% 30%;
+    padding-bottom: 1em;
+}
+
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5em;
+    border-radius: 0.25em;
+    margin-block: 0.2em;
+  }

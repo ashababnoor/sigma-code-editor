@@ -11,7 +11,7 @@
     <script src="codemirror-5.64.0/mode/javascript/javascript.js"></script>
 
     <script src="app.js"></script>
-
+    <link rel="stylesheet" href="app.css">
 </head>
 <body>
     <div class="grid-container">
