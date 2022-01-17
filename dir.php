@@ -14,7 +14,7 @@
         }
         $path = $dir . '/' . $file;
         if(is_dir($path)) {
-          
+            echo $file;
             echo '<div id="'.$path.'" onclick="openFolder(this.id)" class="file" style="background-image: url(file_img/res/folder.svg);">'.$file.'</div>';
         }
     }

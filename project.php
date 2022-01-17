@@ -238,6 +238,16 @@
                 document.getElementById('files').innerHTML = data;
             });
         }
+
+        function openFile(file) {
+            post("file.php", {file:file}, function(data) {
+                // doc = file;
+                // saved = data;
+                // document.getElementById("file").textContent = doc.split('/').pop();
+                editor.setValue(data, -1);
+                // setMode();
+            });
+        }
     </script>
 </body>
 
