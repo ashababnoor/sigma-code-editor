@@ -29,6 +29,5 @@ Feature List:
 
 Dependencies:
 - Codemirror (version 5.64.0)
-- Bootstrap (version 4.1.3)
-- Semantic UI (version 2.4)
+- Bootstrap (version 5.1.3)
 - JQuery (version 3.6.0)
