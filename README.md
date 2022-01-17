@@ -8,8 +8,8 @@ SigmaCodePro is a versatile online code and text editor.
 
 > Project Name	: SigmaCodePro <br>
 >
-> | Student's Name            | Student ID  | GitHub                                                  |
-> |---------------------------|-------------|---------------------------------------------------------|
+> | Student's Name            | Student ID  | GitHub                                                    |
+> |---------------------------|-------------|-----------------------------------------------------------|
 > | Ahmed Shabab Noor         | 011 193 024 | [ashababnoor](www.github.com/ashababnoor)                 |
 > | Jubaer Ahmad              | 011 181 023 | [jubaer023](www.github.com/jubaer023)                     |
 > | Fahim Al Awsaf            | 011 181 253 | [fawsaf](www.github.com/fawsaf)                           |
@@ -26,3 +26,9 @@ Feature List:
 - Interactive live code playground
 - Code templates
 - Share code with other users
+
+Dependencies:
+- Codemirror (version 5.64.0)
+- Bootstrap (version 4.1.3)
+- Semantic UI (version 2.4)
+- JQuery (version 3.6.0)
