@@ -10,10 +10,10 @@ SigmaCodePro is a versatile online code and text editor.
 >
 > | Student's Name            | Student ID  | GitHub                                                  |
 > |---------------------------|-------------|---------------------------------------------------------|
-> | Ahmed Shabab Noor         | 011 193 024 | ashababnoor(www.github.com/ashababnoor)                 |
-> | Jubaer Ahmad              | 011 181 023 | jubaer023(www.github.com/jubaer023)                     |
-> | Fahim Al Awsaf            | 011 181 253 | fawsaf(www.github.com/fawsaf)                           |
-> | Md. Imtiaz Hossain Shovon | 011 143 129 | ImtiazHossainShovon(www.github.com/ImtiazHossainShovon) |
+> | Ahmed Shabab Noor         | 011 193 024 | [ashababnoor](www.github.com/ashababnoor)                 |
+> | Jubaer Ahmad              | 011 181 023 | [jubaer023](www.github.com/jubaer023)                     |
+> | Fahim Al Awsaf            | 011 181 253 | [fawsaf](www.github.com/fawsaf)                           |
+> | Md. Imtiaz Hossain Shovon | 011 143 129 | [ImtiazHossainShovon](www.github.com/ImtiazHossainShovon) |
 
 <br>
 
