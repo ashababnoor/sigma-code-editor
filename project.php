@@ -195,6 +195,8 @@
         //     lineNumbers: true,
         //     mode: "htmlmixed"
         // });
+        var mode, dir, doc, saved, selectedFile;
+        var keys = {};
         var editor = CodeMirror.fromTextArea(myTextarea, {
             value: "<h1> Hello World! </h1>",
             mode: 'xml',
@@ -203,9 +205,23 @@
             autoCloseTags: true,
         });
         editor.setSize("100%", "80vh");
-        console.log("Yes");
-        openFolder("D:/UIU/Software/Lab/FileEditor/FileEditor/");
 
+        // edit for adding file
+        function load() {
+            console.log("Yes");
+            openFolder("D:/UIU/Software/Lab/demo1/demo1");
+            window.addEventListener("keydown", function(event) {
+                // console.log("click");
+                keys[event.code] = true;
+                console.log(event.altKey);
+                if(event.ctrlKey && event.altKey) {
+                    console.log("click");
+                    event.preventDefault();
+                    save();
+                }
+            });
+            window.addEventListener("keyup", function(event) {delete keys[event.code];});
+        }
         // edit for adding file
         function post(url,data,callback) {
             console.log(url);
@@ -241,11 +257,29 @@
 
         function openFile(file) {
             post("file.php", {file:file}, function(data) {
-                // doc = file;
+                doc = file;
                 // saved = data;
                 // document.getElementById("file").textContent = doc.split('/').pop();
                 editor.setValue(data, -1);
                 // setMode();
+            });
+        }
+
+        function save() {
+            console.log(doc);
+            if(doc === undefined) {return false;}
+            post("save.php", {file:doc,code: editor.getValue()}, function(data) {
+                // console.log("save");
+                if(data === 'true') {
+                    // saved = editor.getValue();
+                    // checkSave();
+                    console.log("save");
+                    alert("saved");
+                }
+                else {
+                    // console.log(data);
+                    alert("error");
+                }
             });
         }
     </script>
