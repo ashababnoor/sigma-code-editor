@@ -221,7 +221,7 @@
         });
         editor.setSize("100%", "80vh");
 
-        // edit for adding file
+        // ##### edit for adding file (Jubaer) #####
         function load() {
             console.log("Yes");
             openFolder("D:/UIU/Software/Lab/demo1/demo1");
@@ -238,7 +238,7 @@
             window.addEventListener("keyup", function(event) {delete keys[event.code];});
             document.getElementById("editor").addEventListener("keyup", checkSave);
         }
-        // edit for adding file
+      
         function post(url,data,callback) {
             console.log(url);
             var xhr = new XMLHttpRequest();
