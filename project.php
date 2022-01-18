@@ -78,6 +78,15 @@
             background-color: rgba(156, 156, 202, 0.3);
         }
         
+        #save {
+            position: absolute;
+            /* top: 5px; */
+            right: 9px;
+            height: 16px;
+            width: 16px;
+            display: none;
+            cursor: pointer;
+        }
         /* .folder {
             width: 100%;
             padding: 8px;
@@ -153,7 +162,8 @@
         <div class="ui item">
             <img id="save" onclick="save()" src="file_img/res/save.svg"/>
         </div>
-           
+        <div class="ui item" id="file">
+        </div>   
         <div class="right menu">
             <div class="ui right aligned category search item">
                 <div class="ui transparent icon input">
@@ -174,6 +184,7 @@
                 <div class="col-sm">
                     <a href=>File</a>
                 </div>
+                
             </div>
             <div id="files">
                 <!-- <div class="file" style="background-image: url(file_img/file.png);">test</div>                
@@ -225,6 +236,7 @@
                 }
             });
             window.addEventListener("keyup", function(event) {delete keys[event.code];});
+            document.getElementById("editor").addEventListener("keyup", checkSave);
         }
         // edit for adding file
         function post(url,data,callback) {
@@ -262,7 +274,7 @@
         function openFile(file) {
             post("file.php", {file:file}, function(data) {
                 doc = file;
-                // saved = data;
+                saved = data;
                 document.getElementById("file").textContent = doc.split('/').pop();
                 editor.setValue(data, -1);
                 // setMode();
@@ -275,16 +287,24 @@
             post("save.php", {file:doc,code: editor.getValue()}, function(data) {
                 // console.log("save");
                 if(data === 'true') {
-                    // saved = editor.getValue();
-                    // checkSave();
+                    saved = editor.getValue();
+                    checkSave();
                     console.log("save");
-                    alert("saved");
+                    // alert("saved");
                 }
                 else {
-                    // console.log(data);
-                    alert("error");
+                    console.log(data);
+                    // alert("error");
                 }
             });
+        }
+        function checkSave() {
+            if(editor.getValue() !== saved && saved !== undefined) {
+                document.getElementById("save").style.display = "block";
+            }
+            else {
+                document.getElementById("save").style.display = "none";
+            }
         }
     </script>
 </body>
