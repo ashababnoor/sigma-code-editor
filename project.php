@@ -77,6 +77,7 @@
         .file:hover {
             background-color: rgba(156, 156, 202, 0.3);
         }
+        
         /* .folder {
             width: 100%;
             padding: 8px;
@@ -149,6 +150,10 @@
         <div class="ui item">
             Settings
         </div>
+        <div class="ui item">
+            <img id="save" onclick="save()" src="file_img/res/save.svg"/>
+        </div>
+           
         <div class="right menu">
             <div class="ui right aligned category search item">
                 <div class="ui transparent icon input">
@@ -169,7 +174,6 @@
                 <div class="col-sm">
                     <a href=>File</a>
                 </div>
-                
             </div>
             <div id="files">
                 <!-- <div class="file" style="background-image: url(file_img/file.png);">test</div>                
@@ -259,7 +263,7 @@
             post("file.php", {file:file}, function(data) {
                 doc = file;
                 // saved = data;
-                // document.getElementById("file").textContent = doc.split('/').pop();
+                document.getElementById("file").textContent = doc.split('/').pop();
                 editor.setValue(data, -1);
                 // setMode();
             });
