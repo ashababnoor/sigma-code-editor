@@ -177,13 +177,16 @@
     
     <div class="ui bottom attached segment">
         <div id="sidebar">
-            <div class="row folder pl-3">
+            <div class="row folder pl-1">
                 <div class="col-sm">
                     <a href=createFolder.php>Folder</a>
                 </div>
                 <div class="col-sm">
-                    <a href=>File</a>
+                    <!-- <a href=>File</a> -->
+                    <button onclick="newFile();">File</button>
+                    <!-- <div onclick="newFile();">File</div> -->
                 </div>
+                
                 
             </div>
             <div id="files">
@@ -224,7 +227,8 @@
         // ##### edit for adding file (Jubaer) #####
         function load() {
             console.log("Yes");
-            openFolder("D:/UIU/Software/Lab/demo1/demo1");
+            // openFolder("D:/UIU/Software/Lab/demo1/demo1");
+            openFolder("..");
             window.addEventListener("keydown", function(event) {
                 // console.log("click");
                 keys[event.code] = true;
@@ -304,6 +308,21 @@
             }
             else {
                 document.getElementById("save").style.display = "none";
+            }
+        }
+        function newFile() {
+            var filename = prompt("Enter the file/folder name");
+
+            if(filename) {
+                post("newFile.php", {filename, dir}, function(data) {
+                    if(data == true) {
+                        openFolder(dir);
+                    }
+                    else {
+                        console.log(data);
+                    }
+                    closeMenu();
+                });
             }
         }
     </script>
