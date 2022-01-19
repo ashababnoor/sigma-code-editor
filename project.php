@@ -97,10 +97,34 @@
             background-size: 24px 24px;
             color: #88e29d;
         } */
+        #menu {
+            width: 95%;
+            max-width: 250px;
+            position: absolute;
+            border: 1px solid rgba(0,0,0,.2);
+            box-shadow: 0 0 4px 4px rgba(0,0,0,.1);
+            border-radius: 3px;
+            background: white;
+            display: none;
+        }
+        #menu.show {
+            display: block;
+        }
+        #menu > div {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background .3s;
+        }
+        #menu > div:hover {
+            background: rgba(20, 128, 255, .1);
+        }
     </style> 
 </head>
 
-<body onload="load()">
+<body onload="load()" onmousedown="closeMenu()" oncontextmenu="event.preventDefault();event.stopPropagation();return false;">
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <a href="home.php" class="navbar-brand"> <img src="images/scp-logo-green.svg" alt="SigmaCodePro" class="navbar-brand-image"> SigmaCodePro</a>
@@ -196,6 +220,11 @@
                 <div class="file" style="background-image: url(file_img/css.png);">test.css</div>
                 <div class="file" style="background-image: url(file_img/javascript.png);">test.js</div>
                 <div class="file" style="background-image: url(file_img/txt.png);">test.txt</div> -->
+            </div>
+
+            <div id="menu" onmousedown="event.stopPropagation();">
+                <div onclick="newFile();">New</div>
+                <div onclick="delFile();">Delete</div>
             </div>
         </div>
         <div id="editor">
@@ -324,6 +353,42 @@
                     }
                     closeMenu();
                 });
+            }
+        }
+        function delFile() {
+            if(selectedFile) {
+                post("delFile.php", {path:selectedFile}, function(data) {
+                    if(data == true) {
+                        openFolder(dir);
+                    }
+                    else {
+                        console.log(data);
+                    }
+                    closeMenu();
+                });
+            }
+        }
+        function deselectAll() {
+            document.querySelectorAll('.selected').forEach(function(e) {
+                e.classList.remove('selected');
+            });
+        }
+        function closeMenu() {
+            document.getElementById('menu').className = '';
+            deselectAll();
+            selectedFile = null;
+        }
+        function fileMouseDown(event, file) {
+            if(file && event.button === 2) {
+                deselectAll();
+                file.classList.add('selected');
+                document.getElementById('menu').style.top = event.clientY + "px";
+                document.getElementById('menu').style.left = event.clientX + "px";
+                document.getElementById('menu').className = 'show';
+
+                selectedFile = file.dataset.path;
+
+                event.stopPropagation();
             }
         }
     </script>
