@@ -271,6 +271,7 @@
         function openFolder(folder) {
             console.log("Yes333");
             post("dir.php", {folder:folder}, function(data){
+                dir = folder;
                 document.getElementById('files').innerHTML = data;
             });
         }

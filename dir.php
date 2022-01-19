@@ -10,7 +10,7 @@
     foreach($files as $file) {
         if($file === '.') {continue;}
         if($file === "..") {
-            echo '<div id="'.dirname($dir).'" onclick="openFolder(this.id)" class="file" style="background-image: url(file_img/res/folder.svg);">Back</div>';
+            echo '<div id="'.dirname($dir).'" onclick="openFolder(this.id)" class="file" ><-- Back</div>';
             continue;
         }
         $path = $dir . '/' . $file;
