@@ -117,7 +117,16 @@
                 </a>
                 <p>Open My Projects</p>
                 </div>
-                
+                <a href="projects.php" class="recent-projects">
+                    <i class='fas fa-folder-open'></i>
+                </a>
+                <p>Open My Projects</p>
+                </div>
+                <a href="Settings.php" class="recent-projects">
+                    <i class='fa fa-gear'></i>
+                </a>
+                <p>Settings</p>
+                </div>
             </div>
         </div>
     </div>
