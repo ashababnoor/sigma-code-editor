@@ -87,6 +87,15 @@
             display: none;
             cursor: pointer;
         }
+        #del {
+            /* position: absolute; */
+            top: 5px;
+            right: 5px;
+            height: 16px;
+            width: 16px;
+            /* display: none; */
+            cursor: pointer;
+        }
         /* .folder {
             width: 100%;
             padding: 8px;
@@ -222,10 +231,10 @@
                 <div class="file" style="background-image: url(file_img/txt.png);">test.txt</div> -->
             </div>
 
-            <div id="menu" onmousedown="event.stopPropagation();">
+            <!-- <div id="menu" onmousedown="event.stopPropagation();">
                 <div onclick="newFile();">New</div>
                 <div onclick="delFile();">Delete</div>
-            </div>
+            </div> -->
         </div>
         <div id="editor">
             <textarea name="" id="myTextarea" cols="30" rows="10">I am jubaer</textarea>
@@ -356,7 +365,9 @@
             }
         }
         function delFile() {
+            console.log(selectedFile);
             if(selectedFile) {
+                console.log("sel");
                 post("delFile.php", {path:selectedFile}, function(data) {
                     if(data == true) {
                         openFolder(dir);
