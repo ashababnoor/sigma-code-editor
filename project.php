@@ -87,15 +87,7 @@
             display: none;
             cursor: pointer;
         }
-        #del {
-            /* position: absolute; */
-            top: 5px;
-            right: 5px;
-            height: 16px;
-            width: 16px;
-            /* display: none; */
-            cursor: pointer;
-        }
+        
         /* .folder {
             width: 100%;
             padding: 8px;
@@ -216,7 +208,7 @@
                 </div>
                 <div class="col-sm">
                     <!-- <a href=>File</a> -->
-                    <button onclick="newFile();">File</button>
+                    <button onclick="newFile();">New File</button>
                     <!-- <div onclick="newFile();">File</div> -->
                 </div>
                 
@@ -231,10 +223,10 @@
                 <div class="file" style="background-image: url(file_img/txt.png);">test.txt</div> -->
             </div>
 
-            <!-- <div id="menu" onmousedown="event.stopPropagation();">
-                <div onclick="newFile();">New</div>
+            <div id="menu" onmousedown="event.stopPropagation();">
+                <!-- <div onclick="newFile();">New</div> -->
                 <div onclick="delFile();">Delete</div>
-            </div> -->
+            </div>
         </div>
         <div id="editor">
             <textarea name="" id="myTextarea" cols="30" rows="10">I am jubaer</textarea>
