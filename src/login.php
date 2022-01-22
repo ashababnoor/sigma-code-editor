@@ -32,7 +32,7 @@ if(
         <!-- External JS File -->
         <script type="text/javascript" src="../static/js/script.js"></script>
 
-        <title> Customer Login | KitchenDoodle</title>
+        <title> Login | SigmaCodePro</title>
 
         <style>
             html,
@@ -50,7 +50,7 @@ if(
 
             .form-signin {
             width: 100%;
-            max-width: 400px;
+            max-width: 30em;
             padding: 15px;
             margin: auto;
             }
@@ -96,10 +96,13 @@ if(
         
         
         <!-- Main Section -->
-        <main class="my-5 editor-bg text-dark text-center" style="height: 100vh;">
+        <main class="my-5 editor-bg text-dark text-center" style="min-height: 100vh;">
         <div class="form-signin">
-        <form>
-            <img class="mb-4" src="../assets/images/scp-logo-green.svg" alt="" width="72" height="57">
+        <form action="loginProcess.php" method="post" >
+            <div class="d-flex align-items-center justify-content-center mb-3" style="gap: 1em;">
+                <img class="mb-2" src="../assets/images/scp-logo-green.svg" alt="" width="72" height="57">
+
+            </div>
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
             <div class="form-floating">

@@ -18,147 +18,146 @@ if(
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Favicon -->
-        
+        <link rel="shortcut icon" href="../assets/favicon.svg" type="image/svg">
+        <!-- Bootstrap 5 CSS -->
+        <link rel="stylesheet" href="../dependencies/bootstrap/css/bootstrap.min.css">
+        <!-- Boostrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-        <!-- Bootstrap CDN -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <!-- Bootsrap Icons -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <!-- Custom CSS -->
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/style-login.css" rel="stylesheet">
-        <link href="css/style-landing-page.css" rel="stylesheet"> 
-
-        <link rel="shortcut icon" href="images/scp-logo-green.svg" type="image/x-icon">
+        <link rel="stylesheet" href="../static/css/style.css">
 
         <!-- External JS File -->
-        <script type="text/javascript" src="js/code.js"></script>
+        <script type="text/javascript" src="../static/js/script.js"></script>
 
-        <link rel="stylesheet" href="bootstrap-4.1.3/css/bootstrap.min.css">
-
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/style-landing-page.css">
-
-        <title> Sign Up | SigmaCodePro </title>
+        <title> Sign Up | SigmaCodePro</title>
 
         <style>
-            nav{
-                width: 65em;
-                margin: 0 auto;
+            html,
+            body {
+            height: 100%;
             }
+
+            main.editor-bg {
+            display: flex;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #fafafa;
+            }
+
+            .form-signin {
+            width: 100%;
+            max-width: 50em;
+            padding: 15px;
+            margin: auto;
+            }
+
         </style>
     </head>
-    <body>
-        <!-- Navbar Start -->
-        <nav class="navbar navbar-expand-md navbar-light extra-padding">
-            <a href="index.html" class="navbar-brand navbar-brand-x" id="nav-text"> 
-                SigmaCodePro
-                <!-- <img src="images/kd-logo-full-green.svg" alt="KD" class="navbar-brand-image">  -->
-            </a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarMenu">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="faq.php" class="nav-link"> About </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="signup.php" class="nav-link"> Sign Up </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="login.php" class="nav-link"> Login </a>
-                    </li>
-                    <!-- <li class="nav-item">
-                        <a href="employeeLogin.php" class="nav-link"> Employee </a>
-                    </li> -->
-                </ul>
+
+    <body class="bg-dark text-light">
+        <!-- Header -->
+        <header>
+            <div class="bg-dark w-100 header-div fixed-top p-3">
+                <div class="cover-container mx-auto text-center w-100">
+                    <h3 class="float-md-start mb-0">SigmaCodePro</h3>
+                    <nav class="nav nav-masthead justify-content-center float-md-end">
+                        <a class="nav-link" aria-current="page" href="index.html#about">About</a>
+                        <a class="nav-link" href="index.html#feature-1">Features</a>
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                        <a class="nav-link green" href="login.php">Login</a>
+                    </nav>
+                </div>
             </div>
-        </nav>
-        <!-- Navbar End -->
+        </header>
+        
+        
+        <!-- Main Section -->
+        <main class="py-5 my-5 editor-bg text-dark" style="min-height: 100vh;">
+        <div class="form-signin">
 
-
-        <!-- Login Section -->
-        <div class="container-fluid login-container content" style="padding: 2em 2em">
-            <div class="d-flex justify-content-center d-flex align-items-center" style="flex-direction: column;">
-                <img src="images/scp-logo-full-green.svg" alt="" class="full-logo" onclick="redirect('index.html')" style="cursor: pointer;"> 
-                <h4 style="margin-top: 1em; margin-bottom:2em;">Create A New Account!</h4>
+        <form action="signupProcess.php" method="post" class="row g-3 needs-validation" novalidate>
+            <div class="d-flex align-items-center justify-content-center mb-2" style="gap: 1em;">
+                <img class="mb-2" src="../assets/images/scp-logo-green.svg" alt="" width="72" height="57">
+                <img class="mb-2" src="../assets/images/scp-logo-full-green.svg" alt="" height="40">
             </div>
 
-            <form action="signupProcess.php" method="post" class="needs-validation" novalidate>
-                <div class="form-group">
-                    <label for="myfirstname">First Name</label>
-                    <input class="form-control" type="text" id="myfirstname" name="myfirstname" placeholder="Your first name" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Please provide a valid first name.
-                    </div>
+            <h1 class="h3 mb-3 fw-normal text-center">Create a new account!</h1>
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="myfirstname" name="myfirstname" placeholder="First name" required>
+                <div class="valid-feedback">
+                    Looks good!
                 </div>
-                <div class="form-group">
-                    <label for="mylastname">Last Name</label>
-                    <input class="form-control" type="text" id="mylastname" name="mylastname" placeholder="Your last name" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Please provide a valid last name.
-                    </div>
+                <div class="invalid-feedback">
+                    Please choose a valid first name.
                 </div>
-                <div class="form-group">
-                    <label for="myfirstname">Username</label>
-                    <input class="form-control" type="text" id="username" name="username" placeholder="Your username" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Please provide a valid username.
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="dob">Date of Birth</label>
-                    <input class="form-control" type="date" id="dob" name="dob" placeholder="Your date of birth" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Please provide a valid date of birth.
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="myemail">Email</label>
-                    <input class="form-control" type="email" id="myemail" name="myemail" placeholder="Your email" required>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Please provide a valid email.
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="mypass">Password</label>
-                    <input class="form-control" type="password" id="mypass" name="mypass" placeholder="Your password" required onkeyup="checkPass()">
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Please provide a valid password.
-                    </div>
-                </div>
-                <div class="form-group" id="passval-div">
-                    <label for="mypassval">Re-type Password</label>
-                    <input class="form-control" type="password" id="mypassval" name="mypassval" placeholder="Re-type your password" required onkeyup="checkPass()">
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Please provide the correct password.
-                    </div>
-                </div>
-                
+            </div>
 
-                <div class="form-group">
+            <div class="col-md-6">
+                <input type="text" class="form-control" id="mylastname" name="mylastname" placeholder="Last name" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please choose a valid last name.
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <input type="email" class="form-control" id="myemail" name="myemail" placeholder="Email" required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please choose a valid email.
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group has-validation">
+                    <span class="input-group-text" id="inputGroupPrepend">@</span>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a valid username.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <input type="password" class="form-control" id="mypass" name="mypass" placeholder="Password" required onkeyup="checkPass()">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please choose a valid password.
+                </div>
+            </div>
+            <div class="col-md-6" id="mypassval-div">
+                <input type="password" class="form-control" id="mypassval" placeholder="Retype password"  required onkeyup="checkPass()">
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+                <div class="invalid-feedback">
+                    Please provide the correct password.
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="input-group has-validation">
+                    <span class="input-group-text">Date of birth</span>
+                    <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of birth" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Please choose a valid date.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                         <label class="form-check-label" for="invalidCheck">
@@ -169,37 +168,80 @@ if(
                         </div>
                     </div>
                 </div>
-
-                <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 1em;">
-                    <a href="login.php" class="muted-link">Have an account? Log in instead! </a>
-                    <input class="btn btn-primary" type="submit" value="Click to Signup">
-                </div>
+            
+            <div class="mb-3">
+                <a href="login.php" class="muted-link green-on-hover">
+                    Already have an account? Sign in instead!
+                </a>
+            </div>
+                <button class="w-100 btn btn-lg btn-outline-success" type="submit">Sign up</button>
             </form>
         </div>
-        <!-- Login Section End -->
-        
+        </main>
 
         <!-- Footer Start -->
-        <footer>
-            <div class="row no-gutters text-center text-dark bg-light custom-footer">
-                <div class="col-sm-4">
-                    Contact Information
+        <div class="container">
+            <footer class="pt-5 pb-5 mt-5">
+                <div class="row row-cols-5">
+                    <div class="col">
+                        <a href="index.html" target="_blank" rel="noopener noreferrer">
+                            <img src="../assets/images/scp-logo-green.svg" alt="" srcset="" style="width: 2.5rem;" class="mb-3">
+                        </a>
+                        <p class="text-muted">&copy; 2021</p>
+                    </div>
+
+                    <div class="col">
+
+                    </div>
+
+                    <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                    </div>
+
+                    <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                    </div>
+
+                    <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                    Copyright © 2021
+                <hr>
+                <div class="pt-3 text-center">
+                    <p class="fw-bold" style="font-size: 1.5rem;">SigmaCodePro</p>
+                    <p>
+                        An online versatile code editing tool built for collaboration.
+                        <br> Made with <i class="bi bi-suit-heart-fill" style="color: red;"></i> in United International University.
+                    </p>
                 </div>
-                <div class="col-sm-4">
-                    <a href="index.html" class="">
-                        <img src="images/scp-logo-full-grey.svg" alt="KD" class="footer-logo">
-                    </a>
-                </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
         <!-- Footer End -->
 
-        <!-- JS Script for Bootstrap -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <!-- Boostrap Javascript -->
+        <script src="..\dependencies\bootstrap\js\bootstrap.bundle.min.js"></script>
+        
 
         <script>
             function checkPass(){
