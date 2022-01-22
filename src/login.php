@@ -18,128 +18,171 @@ if(
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
         <!-- Favicon -->
-        <link rel="icon" href="images/kd-logo.svg" type="image/svg">
+        <link rel="shortcut icon" href="../assets/favicon.svg" type="image/svg">
+        <!-- Bootstrap 5 CSS -->
+        <link rel="stylesheet" href="../dependencies/bootstrap/css/bootstrap.min.css">
+        <!-- Boostrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-        <!-- Bootstrap CDN -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <!-- Bootsrap Icons -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
         <!-- Custom CSS -->
-        <link href="css/style.css" rel="stylesheet">
-        <link href="css/style-login.css" rel="stylesheet">
-        <link href="css/style-landing-page.css" rel="stylesheet"> 
+        <link rel="stylesheet" href="../static/css/style.css">
 
         <!-- External JS File -->
-        <script type="text/javascript" src="js/code.js"></script>
+        <script type="text/javascript" src="../static/js/script.js"></script>
 
         <title> Customer Login | KitchenDoodle</title>
 
         <style>
-            #wish-alert{
-                margin: 1em 0em;
+            html,
+            body {
+            height: 100%;
             }
-            #wish-alert-close{
-                height: 100%;
-                padding: 0em 0.8em;
-                margin: auto;
+
+            main.editor-bg {
+            display: flex;
+            align-items: center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #fafafa;
             }
-            strong{
-                font-size: 1rem;
+
+            .form-signin {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+            margin: auto;
             }
+
+            .form-signin .checkbox {
+            font-weight: 400;
+            }
+
+            .form-signin .form-floating:focus-within {
+            z-index: 2;
+            }
+
+            .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+            }
+
+            .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            }
+
         </style>
+
     </head>
-    <body>
-        <!-- Navbar Start -->
-        <nav class="navbar navbar-expand-md navbar-light extra-padding">
-            <a href="index.html" class="navbar-brand navbar-brand-x" id="nav-text"> 
-                SigmaCodePro
-                <!-- <img src="images/kd-logo-full-green.svg" alt="KD" class="navbar-brand-image">  -->
-            </a>
-            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarMenu">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="faq.php" class="nav-link"> FAQ </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="signup.php" class="nav-link"> Sign Up </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="login.php" class="nav-link"> Login </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="employeeLogin.php" class="nav-link"> Employee </a>
-                    </li>
-                </ul>
+    <body class="bg-dark text-light">
+        <!-- Header -->
+        <header>
+            <div class="bg-dark w-100 header-div fixed-top p-3">
+                <div class="cover-container mx-auto text-center w-100">
+                    <h3 class="float-md-start mb-0">SigmaCodePro</h3>
+                    <nav class="nav nav-masthead justify-content-center float-md-end">
+                        <a class="nav-link" aria-current="page" href="index.html#about">About</a>
+                        <a class="nav-link" href="index.html#feature-1">Features</a>
+                        <a class="nav-link" href="index.html#contact">Contact</a>
+                        <a class="nav-link green active" href="login.php">Login</a>
+                    </nav>
+                </div>
             </div>
-        </nav>
-        <!-- Navbar End -->
+        </header>
+        
+        
+        <!-- Main Section -->
+        <main class="my-5 editor-bg text-dark text-center" style="height: 100vh;">
+        <div class="form-signin">
+        <form>
+            <img class="mb-4" src="../assets/images/scp-logo-green.svg" alt="" width="72" height="57">
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
-
-        <!-- Login Section -->
-        <div class="container-fluid login-container content" style="padding:4em 2em">
-        <?php
-
-            if(isset($_SESSION['justloggedin']) && $_SESSION['justloggedin'] == true){
-                $_SESSION['justloggedin'] = false;
-                ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert" id="wish-alert" style="margin-top: -3rem; margin-bottom: 2rem">
-                        <strong>Hurray!</strong> You have successfully signed up!
-                        <button type="button" class="close" id="wish-alert-close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                <?php
-            }
-
-            ?>
-            <div class="d-flex justify-content-center d-flex align-items-center" style="flex-direction: column;">
-                <img src="images/scp-logo-full-green.svg" alt="" class="full-logo" onclick="redirect('index.html')" style="cursor: pointer;"> 
-                <h4 style="margin-top: 1em; margin-bottom:2em;">User Login</h4>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="floatingInput" name="myemail" placeholder="name@example.com">
+                <label for="floatingInput">Email address or username</label>
             </div>
-
-            <form action="loginProcess.php" method="post">
-                <div class="form-group">
-                    <label for="myemail">Email or Username</label>
-                    <input class="form-control" type="text" id="myemail" name="myemail" placeholder="Your email or username">
-                </div>
-                <div class="form-group">
-                    <label for="mypass">Password</label>
-                    <input class="form-control" type="password" id="mypass" name="mypass" placeholder="Your password">
-                </div>
-                <div class="d-flex justify-content-between align-items-center" style="margin-bottom: 1em;">
-                    <a href="signup.php" class="muted-link">No account? Sign up instead! </a>
-                    <input class="btn btn-primary" type="submit" value="Click to Login">
-                </div>
-            </form>
+            
+            <div class="form-floating">
+                <input type="password" class="form-control" id="floatingPassword" name="mypass" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="mb-3">
+                <a href="signup.php" class="muted-link green-on-hover">
+                    No account? Sign up instead!
+                </a>
+            </div>
+            <button class="w-100 btn btn-lg btn-outline-success" type="submit">Sign in</button>
+        </form>
         </div>
-        <!-- Login Section End -->
-
+        </main>
 
         <!-- Footer Start -->
-        <footer>
-            <div class="row no-gutters text-center text-dark bg-light custom-footer">
-                <div class="col-sm-4">
-                    Contact Information
+        <div class="container">
+            <footer class="pt-5 pb-5 mt-5">
+                <div class="row row-cols-5">
+                    <div class="col">
+                        <a href="index.html" target="_blank" rel="noopener noreferrer">
+                            <img src="../assets/images/scp-logo-green.svg" alt="" srcset="" style="width: 2.5rem;" class="mb-3">
+                        </a>
+                        <p class="text-muted">&copy; 2021</p>
+                    </div>
+
+                    <div class="col">
+
+                    </div>
+
+                    <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                    </div>
+
+                    <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                    </div>
+
+                    <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                    Copyright © 2021
+                <hr>
+                <div class="pt-3 text-center">
+                    <p class="fw-bold" style="font-size: 1.5rem;">SigmaCodePro</p>
+                    <p>
+                        An online versatile code editing tool built for collaboration.
+                        <br> Made with <i class="bi bi-suit-heart-fill" style="color: red;"></i> in United International University.
+                    </p>
                 </div>
-                <div class="col-sm-4">
-                    <a href="index.html" class="">
-                        <img src="images/scp-logo-full-grey.svg" alt="SigmaCodePro" class="footer-logo">
-                    </a>
-                </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
         <!-- Footer End -->
 
-        <!-- JS Script for Bootstrap -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+        <!-- Boostrap Javascript -->
+        <script src="..\dependencies\bootstrap\js\bootstrap.bundle.min.js"></script>
 
     </body>
     </html>

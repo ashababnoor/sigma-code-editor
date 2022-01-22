@@ -13,6 +13,71 @@
 /* Pop variations */
 /* Light variations */
 /* Deep variations */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none;
+  /* Prevent inheritance from `body` */
+}
+
+/*
+* Base structure
+*/
+.cover-container {
+  max-width: 42em;
+}
+
+/*
+* Header
+*/
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, 0.25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.nav-masthead .green:hover {
+  color: #92e3a9;
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.border-dark {
+  border-color: #111;
+}
+
+.header-div {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.display-6 {
+  font-size: 2.2rem;
+}
+
+.display-5 {
+  font-size: 2.7rem;
+}
 
 * {
   margin: 0;
@@ -23,4 +88,18 @@
 
 .editor-bg {
   background: url(../../assets/images/editor-background.svg), white;
+  background-repeat: repeat-y;
+}
+
+.muted-link {
+  color: #666;
+  text-decoration: none;
+}
+
+.muted-link:hover, .muted-link:focus {
+  text-decoration: none;
+}
+
+.green-on-hover:hover {
+  color: #009245;
 }

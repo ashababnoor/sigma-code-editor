@@ -2,7 +2,7 @@
 @import './abstracts/variables';
 @import './abstracts/mixins';
 @import './abstracts/functions';
-
+@import './partials/cover';
 
 *{
     margin: 0;
@@ -14,4 +14,18 @@
 
 .editor-bg {
     background: url(../../assets/images/editor-background.svg), white;
+    background-repeat: repeat-y;
+}
+
+.muted-link {
+    color: #666;
+    text-decoration: none;
+
+    &:hover, &:focus{
+        text-decoration: none;
+    }
+}
+
+.green-on-hover:hover{
+    color: $clr-primary-900;
 }
