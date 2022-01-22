@@ -8,27 +8,27 @@
 
     <link rel="shortcut icon" href="images/scp-logo-green.svg" type="image/x-icon">
 
-    <script src="assets/library/jquery.min.js"></script>
+    <script src="../dependencies/jquery/jquery.min.js"></script>
 
-    <script src="codemirror-5.64.0/lib/codemirror.js"></script>
-    <script src="codemirror-5.64.0/mode/xml/xml.js"></script>
+    <script src="../dependencies/codemirror/lib/codemirror.js"></script>
+    <script src="../dependencies/codemirror/mode/xml/xml.js"></script>
 
-    <link rel="stylesheet" href="codemirror-5.64.0/lib/codemirror.css">
-    <link rel="stylesheet" href="codemirror-5.64.0/theme/dracula.css">
+    <link rel="stylesheet" href="../dependencies/codemirror/lib/codemirror.css">
+    <link rel="stylesheet" href="../dependencies/codemirror/theme/dracula.css">
 
-    <script src="codemirror-5.64.0/mode/javascript/javascript.js"></script>
-    <script src="codemirror-5.64.0/mode/css/css.js"></script>
+    <script src="../dependencies/codemirror/mode/javascript/javascript.js"></script>
+    <script src="../dependencies/codemirror/mode/css/css.js"></script>
 
-    <script src="codemirror-5.64.0/addon/edit/closetag.js"></script>
+    <script src="../dependencies/codemirror/addon/edit/closetag.js"></script>
 
-    <link rel="stylesheet" href="bootstrap-4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../dependencies/bootstrap/css/bootstrap.min.css">
 
-    <script src="codemirror-5.64.0/addon/hint/show-hint.js"></script>
+    <script src="../dependencies/codemirror/addon/hint/show-hint.js"></script>
 
-    <script src="codemirror-5.64.0/addon/hint/show-hint.js"></script>
-    <script src="codemirror-5.64.0/addon/hint/css-hint.js"></script>
+    <script src="../dependencies/codemirror/addon/hint/show-hint.js"></script>
+    <script src="../dependencies/codemirror/addon/hint/css-hint.js"></script>
 
-    <link rel="stylesheet" href="codemirror-5.64.0/addon/hint/show-hint.css">
+    <link rel="stylesheet" href="../dependencies/codemirror/addon/hint/show-hint.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <title>Home | SigmaCodePro</title>
@@ -127,7 +127,7 @@
         <textarea name="" id="myTextarea" cols="30" rows="10"></textarea>
     </div>
     
-    <script src="bootstrap-4.1.3/js/bootstrap.min.js"></script>
+    <script src="../dependencies/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
     <script>

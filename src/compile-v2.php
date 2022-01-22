@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodePen Clone</title>
 
-    <script src="codemirror-5.64.0/lib/codemirror.js"></script>
-    <link rel="stylesheet" href="codemirror-5.64.0/lib/codemirror.css">
-    <script src="codemirror-5.64.0/mode/javascript/javascript.js"></script>
-    <script src="codemirror-5.64.0/mode/css/css.js"></script>
+    <script src="../dependencies/codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="../dependencies/codemirror/lib/codemirror.css">
+    <script src="../dependencies/codemirror/mode/javascript/javascript.js"></script>
+    <script src="../dependencies/codemirror/mode/css/css.js"></script>
 
 
     <style>

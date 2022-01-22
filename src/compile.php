@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compilation Mode</title>
 
-    <script src="codemirror-5.64.0/lib/codemirror.js"></script>
-    <link rel="stylesheet" href="codemirror-5.64.0/lib/codemirror.css">
-    <script src="codemirror-5.64.0/mode/javascript/javascript.js"></script>
+    <script src="../dependencies/codemirror/lib/codemirror.js"></script>
+    <link rel="stylesheet" href="../dependencies/codemirror/lib/codemirror.css">
+    <script src="../dependencies/codemirror/mode/javascript/javascript.js"></script>
 
-    <script src="app.js"></script>
-    <link rel="stylesheet" href="app.css">
+    <script src="../static/js/app.js"></script>
+    <link rel="stylesheet" href="../static/css/app.css">
 </head>
 <body>
     <div class="grid-container">
