@@ -121,7 +121,7 @@ if(
 
         <form action="loginProcess.php" method="post" >
             <div class="d-flex align-items-center justify-content-center mb-3" style="gap: 1em;">
-                <img class="mb-2" src="../assets/images/scp-logo-green.svg" alt="" width="72" height="57">
+                <img class="mb-2" src="../assets/images/scp-logo-full-green.svg" alt="" height="50">
 
             </div>
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>

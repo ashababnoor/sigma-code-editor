@@ -79,8 +79,7 @@ if(
 
         <form action="signupProcess.php" method="post" class="row g-3 needs-validation" novalidate>
             <div class="d-flex align-items-center justify-content-center mb-2" style="gap: 1em;">
-                <img class="mb-2" src="../assets/images/scp-logo-green.svg" alt="" width="72" height="57">
-                <img class="mb-2" src="../assets/images/scp-logo-full-green.svg" alt="" height="40">
+                <img class="mb-2" src="../assets/images/scp-logo-full-green.svg" alt="" height="50">
             </div>
 
             <h1 class="h3 mb-3 fw-normal text-center">Create a new account!</h1>
