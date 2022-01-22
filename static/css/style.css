@@ -5,6 +5,22 @@
           box-sizing: border-box;
 }
 
+:root {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Colors */
+/* Pop variations */
+/* Light variations */
+/* Deep variations */
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 .editor-bg {
   background: url(../../assets/images/editor-background.svg), white;
 }
