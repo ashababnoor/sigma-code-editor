@@ -77,6 +77,9 @@
         .file:hover {
             background-color: rgba(156, 156, 202, 0.3);
         }
+        .back {
+            color: #033f11;
+        }
         
         #save {
             position: absolute;
@@ -176,7 +179,8 @@
             
         </div>
         <div class="ui item">
-            File
+            <!-- File -->
+            <button class="btn btn-success" onclick="newFile();">New Folder / File</button>
         </div>
         <div class="ui item">
             View
@@ -208,7 +212,7 @@
                 </div> -->
                 <div class="col-sm">
                     <!-- <a href=>File</a> -->
-                    <button class="btn btn-success" onclick="newFile();">New Folder / File</button>
+                    <!-- <button class="btn btn-success" onclick="newFile();">New Folder / File</button> -->
                     <!-- <div onclick="newFile();">File</div> -->
                 </div>
                 
