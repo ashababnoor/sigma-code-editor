@@ -177,7 +177,7 @@ if(
 
                     <div class="row">
                         <div class="pill-group col col-lg-3">
-                            <div class="icon-section">
+                            <div class="icon-section" onclick="goTo('playground.php')">
                                 <i class="bi bi-code-slash"></i>
                             </div>
                             <div class="text-section">Code Playground</div>
