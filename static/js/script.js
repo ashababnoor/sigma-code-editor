@@ -3,3 +3,4 @@
 function goTo(url){
     location.assign(url)
 }
+
