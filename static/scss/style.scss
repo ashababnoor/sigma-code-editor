@@ -3,6 +3,8 @@
 @import './abstracts/mixins';
 @import './abstracts/functions';
 @import './partials/cover';
+@import './partials/home';
+
 
 *{
     margin: 0;
@@ -10,11 +12,22 @@
     box-sizing: border-box;
 }
 
-
-
 .editor-bg {
+    min-height: 100vh;
     background: url(../../assets/images/editor-background.svg), white;
     background-repeat: repeat-y;
+}
+
+.editor-bg-dark {
+    min-height: 100vh;
+    background: url(../../assets/images/editor-background.svg), transparent;
+    background-repeat: repeat-y;
+}
+
+.bg-white-100 {
+    min-height: 100vh;
+    background: white;
+    color: #222;
 }
 
 .muted-link {
@@ -23,9 +36,18 @@
 
     &:hover, &:focus{
         text-decoration: none;
+        color: #222;
     }
 }
 
 .green-on-hover:hover{
     color: $clr-primary-900;
+}
+
+.bg-success-light {
+    background: $clr-primary-600;
+}
+
+.bg-project {
+    background: $clr-primary-900;
 }

@@ -1,178 +1,227 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/scp-logo-green.svg" type="image/x-icon">
+session_start();
 
-    <link rel="stylesheet" href="bootstrap-4.1.3/css/bootstrap.min.css">
+$_SESSION['current_page'] = 'home.php';
 
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/style-landing-page.css" rel="stylesheet"> 
+if(
+    isset($_SESSION['myemail']) &&
+    !empty($_SESSION['myemail'])
+){
+    //page will be shown only if user is logged in
+    ?>
 
-    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Home | SigmaCodePro</title>
-    <style>
-        .navbar-brand-image{
-            height: 1.5em;
-            padding-right: 0.1em;
-            margin: auto;
-            padding-bottom: 0.1em;
-        }
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="../assets/favicon.svg" type="image/svg">
+        <!-- Bootstrap 5 CSS -->
+        <link rel="stylesheet" href="../dependencies/bootstrap/css/bootstrap.min.css">
+        <!-- Boostrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-        h4{
-            margin-bottom: 1.3em;
-            padding-bottom: 0.5em;
-            border-bottom: 1px solid #ccc;
-            /* box-shadow: 0 0 2px #ccc,
-                        0 0 0px #fff,
-                        0 0 0px #fff,
-                        0 0 0px #fff; */
-        }
-        .container-div{
-            margin: auto;
-            max-width: 80ch;
-        }
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../static/css/style.css">
 
-        .project-buttons{
-            margin-top: 5em;
-            display: flex;
-            flex-direction: row;
-            gap: 7em;
-            justify-content: center;
-        }
-        .project-buttons > * > p{
-            gap: 0.5em;
-            font-size: 1.3em;
-            text-align: center;
-            font-weight: bold;
-        }
-        .project-buttons > * > a {
-            width: 13em;
-            height: 15em;
-            background: grey;
-            box-shadow: inset 0 0 3em #aaa;
-            border-radius: 1.5em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .project-buttons a > * {
-            font-size: 4em;
-            color: #333;
-        }
+        <!-- External JS File -->
+        <script type="text/javascript" src="../static/js/script.js"></script>
 
-        .project-buttons a:hover{
-            background: #22b573;
-            box-shadow: inset 0 0 2em lightgreen;
-        }
+        <title>Home | SigmaCodePro</title>
+    </head>
 
-        a:hover{
-            text-decoration: none;
-        }
-    </style>
-</head>
+    <body class="bg-dark text-light">
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-xl">
+            <a class="navbar-brand" href="home.php">
+                <img src="../assets/images/scp-logo-full-green.svg" alt="" style="height: 1.75rem; margin-bottom: 0.2em">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbardiv" aria-controls="navbardiv" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-<body>  
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a href="home.php" class="navbar-brand"> <img src="images/scp-logo-green.svg" alt="SigmaCodePro" class="navbar-brand-image"> SigmaCodePro</a>
-        
-        <div class="navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a href="" class="nav-link dropdown-toggle" id="dropDownForLogOut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 1em;">
-                        Account
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropDownForLogOut">
-                        <a href="settings.php" class="dropdown-item"> Settings </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="logoutProcess.php" class="dropdown-item"> Log Out </a>
-                    </div>
+            <div class="collapse navbar-collapse" id="navbardiv">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- Navbar End -->
-    
-    <div class="container-fluid content">
-        <div class="container-div">
-            <div class="">
-                <h4> Welcome! Open your projects or create a new one. </h4>
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.php">Settings</a>
+                </li>
+                </ul>
+                <form>
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+                <button class="btn btn-outline-danger mx-2" onclick="goTo('logoutProcess.php')">Log out</button>
             </div>
-
-            <div class="project-buttons">
-                <div>
-                <a href="" data-toggle="modal" data-target="#myModal" class="create-new">
-                    <i class='fas fa-plus-circle'></i>
-                </a>
-                <p>Create New Project</p>
-                </div>
-                <div>
-                <a href="projects.php" class="recent-projects">
-                    <i class='fas fa-folder-open'></i>
-                </a>
-                <p>Open My Projects</p>
-                </div>
-                <a href="projects.php" class="recent-projects">
-                    <i class='fas fa-folder-open'></i>
-                </a>
-                <p>Open My Projects</p>
-                </div>
-                <a href="Settings.php" class="recent-projects">
-                    <i class='fa fa-gear'></i>
-                </a>
-                <p>Settings</p>
-                </div>
             </div>
-        </div>
-    </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg bg-light text-dark shadow-sm">
+            <div class="nav nav-underline container-xl d-flex justify-content-start">
+                <a class="nav-link muted-link" aria-current="page" href="#">Create</a>
+                <a class="nav-link muted-link" href="#">
+                    Projects
+                    <span class="badge bg-success-light text-success rounded-pill align-text-bottom">27</span>
+                </a>
+                <a class="nav-link muted-link" href="#">
+                    Shared
+                    <span class="badge bg-success-light text-success rounded-pill align-text-bottom">27</span>
+                </a>
+                <a class="nav-link muted-link" href="#">Shell</a>
+                <a class="nav-link muted-link" href="#">Playground</a>
+                <a class="nav-link muted-link" href="#">Templates</a>
+                
+            </div>
+        </nav>
+        <!-- Navbar End -->
 
-    <!-- Modal For Updating Preference -->
-            
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="myModalLabel">Create New Project</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
+        <main class="bg-white-100">
+            <div class="container-xl p-5">
+                <div class="d-flex align-items-center p-3 text-white bg-project rounded shadow-sm">
+                    <img class="me-3" src="../assets/images/scp-logo-white.svg" alt="" width="48" height="38">
+                    <div class="lh-1">
+                    <h1 class="h6 mb-0 text-white lh-1">SigmaCodePro</h1>
+                    <small>Since 2021</small>
+                    </div>
                 </div>
-                <div class="modal-body">
-                        <input type="hidden" name="ingredient-id" id="ingredient-id">
-                    
-                        <div class="form-group" style="margin-bottom: 2rem;">
-                            <label for="name" class="col-form-label">Project Name</label>
-                            <input type="text" class="form-control" id="name" name="name" autocomplete="off" placeholder="Enter project name">
+
+                <div class="home pill-container mt-3">
+                    <div class="row">
+                        <div class="pill-group col col-lg-3">
+                            <div class="icon-section">
+                                <i class="bi bi-plus-circle"></i>
+                            </div>
+                            <div class="text-section">Create New Project</div>
                         </div>
 
-                        <div class="form-group" id="status-div">
-                            
+                        <div class="pill-group col col-lg-3">
+                            <div class="icon-section">
+                                <i class="bi bi-folder"></i>
+                            </div>
+                            <div class="text-section">My Projects</div>
                         </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                    <button type="button" id="update-stock" class="btn btn-primary" onclick="createProject()">Create</button>
+
+                        <div class="pill-group col col-lg-3">
+                            <div class="icon-section">
+                                <i class="bi bi-folder-symlink"></i>
+                            </div>
+                            <div class="text-section">Shared By Others</div>
+                        </div>
+
+                        <div class="pill-group col col-lg-3">
+                            <div class="icon-section">
+                                <i class="bi bi-terminal"></i>
+                            </div>
+                            <div class="text-section">JavaScript Shell</div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="pill-group col col-lg-3">
+                            <div class="icon-section">
+                                <i class="bi bi-code-slash"></i>
+                            </div>
+                            <div class="text-section">Code Playground</div>
+                        </div>
+
+                        <div class="pill-group col col-lg-3">
+                            <div class="icon-section">
+                                <i class="bi bi-body-text"></i>
+                            </div>
+                            <div class="text-section">Templates</div>
+                        </div>
+
+                        <div class="pill-group col col-lg-3">
+                            <div class="icon-section">
+                                <i class="bi bi-sliders"></i>
+                            </div>
+                            <div class="text-section">Settings</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </main>
+        
+
+
+        <!-- Footer Start -->
+        <div class="container">
+            <footer class="pt-5 pb-5 mt-5">
+                <div class="row row-cols-5">
+                    <div class="col">
+                        <a href="index.html" target="_blank" rel="noopener noreferrer">
+                            <img src="../assets/images/scp-logo-green.svg" alt="" srcset="" style="width: 2.5rem;" class="mb-3">
+                        </a>
+                        <p class="text-muted">&copy; 2021</p>
+                    </div>
+
+                    <div class="col">
+
+                    </div>
+
+                    <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                    </div>
+
+                    <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                    </div>
+
+                    <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    </ul>
+                    </div>
+                </div>
+                <hr>
+                <div class="pt-3 text-center">
+                    <p class="fw-bold" style="font-size: 1.5rem;">SigmaCodePro</p>
+                    <p>
+                        An online versatile code editing tool built for collaboration.
+                        <br> Made with <i class="bi bi-suit-heart-fill" style="color: red;"></i> in United International University.
+                    </p>
+                </div>
+            </footer>
         </div>
-        </div>
-        <!-- Modal End -->
+        <!-- Footer End -->
 
-    <script src="assets/library/jquery.min.js"></script>
-    <script src="bootstrap-4.1.3/js/bootstrap.min.js"></script>
 
-    <script>
-        function createProject(){
-            let name = document.getElementById('name').value;
-            let location_string = 'createProject.php?name=' + name;
-            location.assign(location_string);
-        }
-    </script>
-</body>
+        <!-- Boostrap Javascript -->
+        <script src="..\dependencies\bootstrap\js\bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
 
-</html>
+    <?php
+
+}
+else{
+    ?>
+        <script> location.assign("login.php") </script>
+    <?php
+}
+
+?>
