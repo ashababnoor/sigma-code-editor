@@ -261,3 +261,7 @@
 .text-white .muted-link:hover, .text-white .muted-link:focus {
   color: #fff;
 }
+
+.small-container {
+  max-width: 60em;
+}

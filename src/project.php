@@ -1,154 +1,453 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+session_start();
 
-    <link rel="shortcut icon" href="images/scp-logo-green.svg" type="image/x-icon">
+$_SESSION['current_page'] = 'project.php';
 
-    <script src="../dependencies/jquery/jquery.min.js"></script>
+if(
+    isset($_SESSION['myemail']) &&
+    !empty($_SESSION['myemail']) &&
 
-    <script src="../dependencies/codemirror/lib/codemirror.js"></script>
-    <script src="../dependencies/codemirror/mode/xml/xml.js"></script>
+    isset($_GET['projectId']) &&
+    !empty($_GET['projectId'])
+){
+    //page will be shown only if user is logged in
 
-    <link rel="stylesheet" href="../dependencies/codemirror/lib/codemirror.css">
-    <link rel="stylesheet" href="../dependencies/codemirror/theme/dracula.css">
+    $userId = $_SESSION['myid'];
+    $projectId = $_GET['projectId'];
 
-    <script src="../dependencies/codemirror/mode/javascript/javascript.js"></script>
-    <script src="../dependencies/codemirror/mode/css/css.js"></script>
+    $project_exists = false;
+    $current_user_is_owner = false;
+    $user_has_access = false;
 
-    <script src="../dependencies/codemirror/addon/edit/closetag.js"></script>
-
-    <link rel="stylesheet" href="../dependencies/bootstrap/css/bootstrap.min.css">
-
-    <script src="../dependencies/codemirror/addon/hint/show-hint.js"></script>
-
-    <script src="../dependencies/codemirror/addon/hint/show-hint.js"></script>
-    <script src="../dependencies/codemirror/addon/hint/css-hint.js"></script>
-
-    <link rel="stylesheet" href="../dependencies/codemirror/addon/hint/show-hint.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-    <title>Home | SigmaCodePro</title>
-
-    <style>
-        .navbar-brand-image{
-            height: 1.5em;
-            padding-right: 0.1em;
-            margin: auto;
-            padding-bottom: 0.1em;
-        }
-
-        .nav{
-            margin-bottom: -2em;
-        }
-
-        #app-nav{
-            margin-top: -0.2em;
-        }
-        body{
-            background: #343a40;
-        }
-    </style>
-</head>
-
-<body>
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a href="home.php" class="navbar-brand"> <img src="images/scp-logo-green.svg" alt="SigmaCodePro" class="navbar-brand-image"> SigmaCodePro</a>
+    //store the data to database
+    try{
+        //PDO = PHP Data Object
+        $conn=new PDO("mysql:host=localhost:3306;dbname=sigmacodepro_db;","root","");
         
-        <div class="navbar-collapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown">
-                    <a href="" class="nav-link dropdown-toggle" id="dropDownForLogOut" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 1em;">
-                        Account
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropDownForLogOut">
-                        <a href="settings.php" class="dropdown-item"> Settings </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="logoutProcess.php" class="dropdown-item"> Log Out </a>
-                    </div>
+        //setting 1 environment variable
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+        $myquerystring="SELECT * FROM `projects` WHERE id = $projectId";
+
+        $returnobj = $conn->query($myquerystring);
+
+        if($returnobj->rowCount()==1){
+            $project_exists = true;
+
+            $second_querystring="SELECT * FROM `projects` WHERE id = $projectId and owner_id = $userId";
+
+            $second_returnobj = $conn->query($second_querystring);
+
+            if($second_returnobj->rowCount()==1){
+                $current_user_is_owner = true;
+            }
+            else if($second_returnobj->rowCount()==0){
+                $third_querystring="SELECT COUNT(*) as num FROM `accesses` WHERE user_id = $myid and is_active = 1; and project_id = $projectId";
+
+                $third_returnobj = $conn->query($third_querystring);
+
+                if($third_returnobj->rowCount() >= 1){
+                    $user_has_access = true;
+                }
+            }
+        }
+    }
+    catch(PDOException $ex){
+    }
+
+    ?>
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="../assets/favicon.svg" type="image/svg">
+        <!-- Bootstrap 5 CSS -->
+        <link rel="stylesheet" href="../dependencies/bootstrap/css/bootstrap.min.css">
+        <!-- Boostrap Icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="../static/css/style.css">
+
+        <!-- External JS File -->
+        <script type="text/javascript" src="../static/js/script.js"></script>
+
+        <!-- Codemirror Code Dependencies -->
+        <script src="../dependencies/codemirror/lib/codemirror.js"></script>
+        <link rel="stylesheet" href="../dependencies/codemirror/lib/codemirror.css">
+        <!-- Codemirror Modes -->
+        <script src="../dependencies/codemirror/mode/javascript/javascript.js"></script>
+        <!-- Codemirror Add-Ons -->
+
+        <!-- Codemirror Theme -->
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/3024-day.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/3024-night.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/abbott.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/abcdef.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/ambiance.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/ayu-dark.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/ayu-mirage.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/base16-dark.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/bespin.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/base16-light.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/blackboard.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/cobalt.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/colorforth.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/dracula.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/duotone-dark.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/duotone-light.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/eclipse.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/elegant.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/erlang-dark.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/gruvbox-dark.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/hopscotch.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/icecoder.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/isotope.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/juejin.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/lesser-dark.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/liquibyte.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/lucario.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/material.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/material-darker.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/material-palenight.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/material-ocean.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/mbo.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/mdn-like.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/midnight.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/monokai.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/moxer.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/neat.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/neo.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/night.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/nord.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/oceanic-next.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/panda-syntax.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/paraiso-dark.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/paraiso-light.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/pastel-on-dark.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/railscasts.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/rubyblue.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/seti.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/shadowfox.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/solarized.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/the-matrix.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/tomorrow-night-bright.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/tomorrow-night-eighties.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/ttcn.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/twilight.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/vibrant-ink.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/xq-dark.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/xq-light.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/yeti.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/idea.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/darcula.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/yonce.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/theme/zenburn.css">
+
+
+        <title>Interactive Shell | SigmaCodePro</title>
+    </head>
+
+    <body class="bg-dark text-light">
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-xl">
+            <a class="navbar-brand" href="home.php">
+                <img src="../assets/images/scp-logo-full-green.svg" alt="" style="height: 1.75rem; margin-bottom: 0.2em">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbardiv" aria-controls="navbardiv" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbardiv">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="home.php">Home</a>
                 </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- Navbar End -->
-    <div class="ui inverted top attached menu" id="app-nav">
-        <div class="ui dropdown icon item">
-            <i class="wrench icon"></i>
-            <div class="menu">
-                <div class="item">
-                    <i class="dropdown icon"></i>
-                    <span class="text">New</span>
-                    <div class="menu">
-                        <div class="item">Document</div>
-                        <div class="item">Image</div>
-                    </div>
-                </div>
-                <div class="item">
-                    Open...
-                </div>
-                <div class="item">
-                    Save...
-                </div>
-                <div class="item">Edit Permissions</div>
-                <div class="divider"></div>
-                <div class="header">
-                    Export
-                </div>
-                <div class="item">
-                    Share...
+                <li class="nav-item">
+                    <a class="nav-link" href="settings.php">Settings</a>
+                </li>
+                </ul>
+                <form>
+                    <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                </form>
+                <button class="btn btn-outline-danger mx-2" onclick="goTo('logoutProcess.php')">Log out</button>
+            </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg bg-black text-white shadow-sm">
+            <div class="nav nav-underline container-xl d-flex justify-content-start">
+                <a class="nav-link muted-link" href="myprojects.php">
+                    Projects
+                    <span class="badge bg-success-light text-success rounded-pill align-text-bottom">
+                        <?php
+                            $project_num = 0;
+                            $myid = $_SESSION['myid'];
+                            try{
+                                //PDO = PHP Data Object
+                                $conn=new PDO("mysql:host=localhost:3306;dbname=sigmacodepro_db;","root","");
+                                
+                                //setting 1 environment variable
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                                $myquerystring="SELECT COUNT(*) as num FROM `projects` WHERE owner_id = $myid;";
+                                
+                                $returnObj = $conn->query($myquerystring);
+                            
+                                if($returnObj->rowCount()==1){
+                                    foreach($returnObj as $row){
+                                        $project_num = $row['num'];
+                                    }
+                                }
+                            }
+                            catch(PDOException $ex){
+                                
+                            }
+
+                            echo $project_num;
+                        ?>
+                    </span>
+                </a>
+                <a class="nav-link muted-link" href="shared.php">
+                    Shared
+                    <span class="badge bg-success-light text-success rounded-pill align-text-bottom">
+                        <?php
+                            $shared_num = 0;
+                            
+                            try{
+                                //PDO = PHP Data Object
+                                $conn=new PDO("mysql:host=localhost:3306;dbname=sigmacodepro_db;","root","");
+                                
+                                //setting 1 environment variable
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                                $myquerystring="SELECT COUNT(*) as num FROM `accesses` WHERE user_id = $myid and is_active = 1;";
+                                
+                                $returnObj = $conn->query($myquerystring);
+                            
+                                if($returnObj->rowCount()==1){
+                                    foreach($returnObj as $row){
+                                        $shared_num = $row['num'];
+                                    }
+                                }
+                            }
+                            catch(PDOException $ex){
+                                
+                            }
+
+                            echo $shared_num;
+                        ?>
+                    </span>
+                </a>
+                <a class="nav-link muted-link active" href="shell.php">Shell</a>
+                <a class="nav-link muted-link" href="playground.php">Playground</a>
+                <a class="nav-link muted-link" href="templates.php">Templates</a>
+                
+                <div class="flex-grow-1">
+                    <a class="nav-link muted-link" href="">Download</a>
                 </div>
             </div>
             
-        </div>
-        <div class="ui item">
-            File
-        </div>
-        <div class="ui item">
-            View
-        </div>
-        <div class="ui item">
-            Settings
-        </div>
-        <div class="right menu">
-            <div class="ui right aligned category search item">
-                <div class="ui transparent icon input">
-                    <input class="prompt" type="text" placeholder="Search project...">
-                    <i class="search link icon"></i>
-                </div>
-                <div class="results"></div>
-            </div>
-        </div>
-    </div>
-    <div class="ui bottom attached segment">
-        <textarea name="" id="myTextarea" cols="30" rows="10"></textarea>
-    </div>
-    
-    <script src="../dependencies/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+        </nav>
+        <!-- Navbar End -->
+        
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+            </symbol>
+            <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+            </symbol>
+            <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </symbol>
+        </svg>
 
-    <script>
-        //let myTextarea = document.getElementById('myTextArea');
-        // var editor = CodeMirror.fromTextArea(myTextarea, {
-        //     value: "<h1> Hello World! </h1>",
-        //     lineNumbers: true,
-        //     mode: "htmlmixed"
-        // });
-        var editor = CodeMirror.fromTextArea(myTextarea, {
-            value: "<h1> Hello World! </h1>",
-            mode: 'css',
-            theme: 'dracula',
-            lineNumbers: true,
-            autoCloseTags: true,
-            indentUnit: 4,
-            tabSize: 4,
-            extraKeys: {"Ctrl-Space" : "autocomplete"},
-        });
-        editor.setSize("100%", "80vh")
-    </script>
-</body>
+        <main class="project">
+            <?php
+                if($project_exists && ($current_user_is_owner || $user_has_access)){
+                    ?>
+                        <div class="main-container">
 
-</html>
+                        </div>
+                    <?php
+                }
+                else if(!$project_exists){
+                    ?>
+                        <main class="container small-container bg-min-100">
+                            <div class="alert alert-danger my-5" role="alert">
+                                <h3><code>404 Not Found</code></h3>
+                                <p>It looks like you came to a broken link. This project doesn't exist!</p>
+                                <hr>
+                                <p class="mb-0">Please make sure you have the correct link and come back. In the meantime, you can go back home.</p>
+
+                                <div class="d-flex flex-row-reverse">
+                                    <button class="btn btn-danger mt-3">Go Home</button>
+                                </div>
+                            </div>
+                        </main>
+
+                        <div class="bg-black shadow-lg">
+                        <div class="container">
+                            <footer class="pt-5 pb-5 mt-5">
+                                <div class="row row-cols-5">
+                                    <div class="col">
+                                        <a href="index.html" target="_blank" rel="noopener noreferrer">
+                                            <img src="../assets/images/scp-logo-green.svg" alt="" srcset="" style="width: 2.5rem;" class="mb-3">
+                                        </a>
+                                        <p class="text-muted">&copy; 2021</p>
+                                    </div>
+
+                                    <div class="col">
+
+                                    </div>
+
+                                    <div class="col">
+                                    <h5>Section</h5>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                                    </ul>
+                                    </div>
+
+                                    <div class="col">
+                                    <h5>Section</h5>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                                    </ul>
+                                    </div>
+
+                                    <div class="col">
+                                    <h5>Section</h5>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                                    </ul>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="pt-3 text-center">
+                                    <p class="fw-bold" style="font-size: 1.5rem;">SigmaCodePro</p>
+                                    <p>
+                                        An online versatile code editing tool built for collaboration.
+                                        <br> Made with <i class="bi bi-suit-heart-fill" style="color: red;"></i> in United International University.
+                                    </p>
+                                </div>
+                            </footer>
+                        </div>
+                        </div>
+                    <?php
+                }
+                elseif(!$current_user_is_owner && !$user_has_access){
+                    ?>
+                        <main class="container small-container bg-min-100">
+                            <div class="alert alert-warning my-5" role="alert">
+                                <h3><code>403 Forbidden</code></h3>
+                                <p>It looks like you don't have access to view this project. This project was not shared with you!</p>
+                                <hr>
+                                <p class="mb-0">Please make sure you have the proper access and come back. In the meantime, you can go back home.</p>
+
+                                <div class="d-flex flex-row-reverse">
+                                    <button class="btn btn-warning mt-3">Go Home</button>
+                                </div>
+                            </div>
+                        </main>
+
+                        <div class="bg-dark shadow-lg">
+                        <div class="container">
+                            <footer class="pt-5 pb-5 mt-5">
+                                <div class="row row-cols-5">
+                                    <div class="col">
+                                        <a href="index.html" target="_blank" rel="noopener noreferrer">
+                                            <img src="../assets/images/scp-logo-green.svg" alt="" srcset="" style="width: 2.5rem;" class="mb-3">
+                                        </a>
+                                        <p class="text-muted">&copy; 2021</p>
+                                    </div>
+
+                                    <div class="col">
+
+                                    </div>
+
+                                    <div class="col">
+                                    <h5>Section</h5>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                                    </ul>
+                                    </div>
+
+                                    <div class="col">
+                                    <h5>Section</h5>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                                    </ul>
+                                    </div>
+
+                                    <div class="col">
+                                    <h5>Section</h5>
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                                        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                                    </ul>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="pt-3 text-center">
+                                    <p class="fw-bold" style="font-size: 1.5rem;">SigmaCodePro</p>
+                                    <p>
+                                        An online versatile code editing tool built for collaboration.
+                                        <br> Made with <i class="bi bi-suit-heart-fill" style="color: red;"></i> in United International University.
+                                    </p>
+                                </div>
+                            </footer>
+                        </div>
+                        </div>
+                    <?php
+                }
+            ?>
+
+        </main>
+
+        <!-- Boostrap Javascript -->
+        <script src="../dependencies/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <script src="../static/js/shell.js"></script>
+    </body>
+    </html>
+
+    <?php
+
+}
+else{
+    ?>
+        <script> location.assign("login.php") </script>
+    <?php
+}
+
+?>

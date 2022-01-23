@@ -8,7 +8,6 @@ if(
 
 ){
     if( 
-
         isset($_GET['name']) &&
         !empty($_GET['name'])
     ){
@@ -31,20 +30,20 @@ if(
 
             $conn->exec($myquerystring);
 
-            // $myquerystring="SELECT * FROM projects where owner_id=$userId AND name=$name limit 1";
+            $second_querystring="SELECT * FROM projects where owner_id=$userId AND name='$name' limit 1";
 
-            // $returnobj = $conn->query($myquerystring);
+            $returnobj = $conn->query($second_querystring);
 
-            // $projectId = '';
-            // if($returnobj->rowCount()==1){
+            $projectId = '';
+            if($returnobj->rowCount()==1){
 
-            //     foreach($returnobj as $row){
-            //         $projectId = $row['id'];
-            //     }
-            // }
-        
+                foreach($returnobj as $row){
+                    $projectId = $row['id'];
+                }
+            }
+
             ?>
-                 <script> location.assign("project.php?name=<?php echo $name; ?>&projectId=<?php echo $projectId; ?>"); </script>
+                 <script> location.assign("project.php?projectId=<?php echo $projectId; ?>"); </script>
             <?php
         }
         catch(PDOException $ex){

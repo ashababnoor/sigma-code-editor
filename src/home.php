@@ -63,7 +63,7 @@ if(
         </nav>
         <nav class="navbar navbar-expand-lg bg-light text-dark shadow-sm">
             <div class="nav nav-underline container-xl d-flex justify-content-start">
-                <a class="nav-link muted-link" aria-current="page" href="#">Create</a>
+                <a class="nav-link muted-link" aria-current="page" href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Create</a>
                 <a class="nav-link muted-link" href="myprojects.php">
                     Projects
                     <span class="badge bg-success-light text-success rounded-pill align-text-bottom">
@@ -108,7 +108,7 @@ if(
                                 //setting 1 environment variable
                                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                                $myquerystring="SELECT COUNT(*) as num FROM `accesses` WHERE user_id = $myid;";
+                                $myquerystring="SELECT COUNT(*) as num FROM `accesses` WHERE user_id = $myid and is_active = 1;";
                                 
                                 $returnObj = $conn->query($myquerystring);
                             
@@ -147,7 +147,7 @@ if(
                 <div class="home pill-container mt-4">
                     <div class="row">
                         <div class="pill-group col col-lg-3">
-                            <div class="icon-section">
+                            <div class="icon-section" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <i class="bi bi-plus-circle"></i>
                             </div>
                             <div class="text-section">Create New Project</div>
@@ -200,6 +200,32 @@ if(
                 </div>
             </div>
         </main>
+
+        
+        <!-- Modal for creating project -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered text-dark">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Create New Project</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="" id="">
+                    
+                    <div class="form-group" style="margin-bottom: 2rem;">
+                        <label for="name" class="col-form-label">Project Name</label>
+                        <input type="text" class="form-control" id="name" name="name" autocomplete="off" placeholder="Enter project name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success" onclick="createProject()">Create</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal End -->
         
 
 
@@ -265,7 +291,15 @@ if(
 
 
         <!-- Boostrap Javascript -->
-        <script src="..\dependencies\bootstrap\js\bootstrap.bundle.min.js"></script>
+        <script src="../dependencies/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            function createProject(){
+                let name = document.getElementById('name').value;
+                let location_string = 'createProject.php?name=' + name;
+                location.assign(location_string);
+            }
+        </script>
     </body>
     </html>
 
