@@ -7,6 +7,7 @@ window.onload = () => {
         mode: 'javascript',
         lineNumbers: true,
         theme: preferred_theme,
+        extraKeys: {"Ctrl-Space": "autocomplete"},
     });
 
     // var editorHeight = input.parentElement.clientHeight;

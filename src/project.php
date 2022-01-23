@@ -92,7 +92,29 @@ if(
         <script src="../dependencies/codemirror/mode/xml/xml.js"></script>
         <script src="../dependencies/codemirror/mode/python/python.js"></script>
         <script src="../dependencies/codemirror/mode/php/php.js"></script>
+        <script src="../dependencies/codemirror/mode/htmlmixed/htmlmixed.js"></script>
         <!-- Codemirror Add-Ons -->
+        <script src="../dependencies/codemirror/addon/edit/closetag.js"></script>
+        <script src="../dependencies/codemirror/addon/edit/closebrackets.js"></script>
+        <script src="../dependencies/codemirror/addon/edit/matchbrackets.js"></script>
+        <script src="../dependencies/codemirror/addon/edit/matchtags.js"></script>
+        <script src="../dependencies/codemirror/addon/edit/trailingspace.js"></script>
+        <script src="../dependencies/codemirror/addon/edit/continuelist.js"></script>
+
+        <script src="../dependencies/codemirror/addon/dialog/dialog.js"></script>
+        <script src="../dependencies/codemirror/addon/search/searchcursor.js"></script>
+        <script src="../dependencies/codemirror/addon/search/search.js"></script>
+        <script src="../dependencies/codemirror/addon/scroll/annotatescrollbar.js"></script>
+        <script src="../dependencies/codemirror/addon/search/matchesonscrollbar.js"></script>
+        <script src="../dependencies/codemirror/addon/search/jump-to-line.js"></script>
+        <link rel="stylesheet" href="../dependencies/codemirror/addon/dialog/dialog.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/addon/search/matchesonscrollbar.css">
+
+        <script src="../dependencies/codemirror/addon/hint/show-hint.js"></script>
+        <script src="../dependencies/codemirror/addon/hint/javascript-hint.js"></script>
+        <script src="../dependencies/codemirror/addon/hint/html-hint.js"></script>
+        <script src="../dependencies/codemirror/addon/hint/css-hint.js"></script>
+        <script src="../dependencies/codemirror/addon/hint/css-hint.js"></script>
 
         <!-- Codemirror Theme -->
         <link rel="stylesheet" href="../dependencies/codemirror/theme/3024-day.css">
@@ -160,7 +182,7 @@ if(
         <link rel="stylesheet" href="../dependencies/codemirror/theme/zenburn.css">
 
 
-        <title>Interactive Shell | SigmaCodePro</title>
+        <title>Project | SigmaCodePro</title>
     </head>
 
     <body class="bg-dark text-light">
@@ -278,7 +300,7 @@ if(
             </symbol>
         </svg>
 
-        <div class="project">
+        <div class="project" style="height: 10vh;">
             <?php
                 if($project_exists && ($current_user_is_owner || $user_has_access)){
                     ?>
@@ -349,17 +371,18 @@ if(
                                 <div class="code-area-header">
                                 <div class="input-group">
                                     <span class="input-group-text">File name</span>
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="file name">
+                                    <input type="text" class="form-control" id="file" placeholder="file name" aria-label="file name">
                                     <span class="input-group-text">Extension</span>
                                     <select class="form-select" id="extension">
-                                        <option value="xml" selected>.html</option>
+                                        <option value="htmlmixed" selected>.html</option>
                                         <option value="css">.css</option>
                                         <option value="javascript">.js</option>
                                         <option value="php">.php</option>
                                         <option value="python">.py</option>
+                                        <option value="text">.txt</option>
                                     </select>
                                     <button class="btn btn-success">Save</button>
-                                    <button class="btn btn-warning">Download</button>
+                                    <button class="btn btn-warning" onclick="download()">Download</button>
                                     <button class="btn btn-primary">Share</button>
                                 </div>
                                 </div>
@@ -528,6 +551,9 @@ if(
         <script src="../dependencies/bootstrap/js/bootstrap.bundle.min.js"></script>
 
         <script src="../static/js/project.js"></script>
+        
+        <!-- JQuery -->
+        <script src="../dependencies/jquery/jquery.min.js"></script>
     </body>
     </html>
 

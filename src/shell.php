@@ -37,7 +37,27 @@ if(
         <!-- Codemirror Modes -->
         <script src="../dependencies/codemirror/mode/javascript/javascript.js"></script>
         <!-- Codemirror Add-Ons -->
+        <script src="../dependencies/codemirror/addon/edit/closetag.js"></script>
+        <script src="../dependencies/codemirror/addon/edit/closebrackets.js"></script>
+        <script src="../dependencies/codemirror/addon/edit/matchbrackets.js"></script>
+        <script src="../dependencies/codemirror/addon/edit/matchtags.js"></script>
+        <script src="../dependencies/codemirror/addon/edit/trailingspace.js"></script>
+        <script src="../dependencies/codemirror/addon/edit/continuelist.js"></script>
 
+        <script src="../dependencies/codemirror/addon/dialog/dialog.js"></script>
+        <script src="../dependencies/codemirror/addon/search/searchcursor.js"></script>
+        <script src="../dependencies/codemirror/addon/search/search.js"></script>
+        <script src="../dependencies/codemirror/addon/scroll/annotatescrollbar.js"></script>
+        <script src="../dependencies/codemirror/addon/search/matchesonscrollbar.js"></script>
+        <script src="../dependencies/codemirror/addon/search/jump-to-line.js"></script>
+        <link rel="stylesheet" href="../dependencies/codemirror/addon/dialog/dialog.css">
+        <link rel="stylesheet" href="../dependencies/codemirror/addon/search/matchesonscrollbar.css">
+
+        <script src="../dependencies/codemirror/addon/hint/show-hint.js"></script>
+        <script src="../dependencies/codemirror/addon/hint/javascript-hint.js"></script>
+        <script src="../dependencies/codemirror/addon/hint/html-hint.js"></script>
+        <script src="../dependencies/codemirror/addon/hint/css-hint.js"></script>
+        <script src="../dependencies/codemirror/addon/hint/css-hint.js"></script>
         <!-- Codemirror Theme -->
         <link rel="stylesheet" href="../dependencies/codemirror/theme/3024-day.css">
         <link rel="stylesheet" href="../dependencies/codemirror/theme/3024-night.css">
