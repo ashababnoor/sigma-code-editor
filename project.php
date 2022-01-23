@@ -202,13 +202,13 @@
     
     <div class="ui bottom attached segment">
         <div id="sidebar">
-            <div class="row folder pl-1">
-                <div class="col-sm">
+            <div class="row folder pl-5">
+                <!-- <div class="col-sm">
                     <a href=createFolder.php>Folder</a>
-                </div>
+                </div> -->
                 <div class="col-sm">
                     <!-- <a href=>File</a> -->
-                    <button onclick="newFile();">New File</button>
+                    <button class="btn btn-success" onclick="newFile();">New Folder / File</button>
                     <!-- <div onclick="newFile();">File</div> -->
                 </div>
                 
