@@ -48,7 +48,7 @@ if(
             <div class="collapse navbar-collapse" id="navbardiv">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="home.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="settings.php">Settings</a>
@@ -64,17 +64,71 @@ if(
         <nav class="navbar navbar-expand-lg bg-light text-dark shadow-sm">
             <div class="nav nav-underline container-xl d-flex justify-content-start">
                 <a class="nav-link muted-link" aria-current="page" href="#">Create</a>
-                <a class="nav-link muted-link" href="#">
+                <a class="nav-link muted-link" href="myprojects.php">
                     Projects
-                    <span class="badge bg-success-light text-success rounded-pill align-text-bottom">27</span>
+                    <span class="badge bg-success-light text-success rounded-pill align-text-bottom">
+                        <?php
+                            $project_num = 0;
+                            $myid = $_SESSION['myid'];
+                            try{
+                                //PDO = PHP Data Object
+                                $conn=new PDO("mysql:host=localhost:3306;dbname=sigmacodepro_db;","root","");
+                                
+                                //setting 1 environment variable
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                                $myquerystring="SELECT COUNT(*) as num FROM `projects` WHERE owner_id = $myid;";
+                                
+                                $returnObj = $conn->query($myquerystring);
+                            
+                                if($returnObj->rowCount()==1){
+                                    foreach($returnObj as $row){
+                                        $project_num = $row['num'];
+                                    }
+                                }
+                            }
+                            catch(PDOException $ex){
+                                
+                            }
+
+                            echo $project_num;
+                        ?>
+                    </span>
                 </a>
-                <a class="nav-link muted-link" href="#">
+                <a class="nav-link muted-link" href="shared.php">
                     Shared
-                    <span class="badge bg-success-light text-success rounded-pill align-text-bottom">27</span>
+                    <span class="badge bg-success-light text-success rounded-pill align-text-bottom">
+                        <?php
+                            $shared_num = 0;
+                            
+                            try{
+                                //PDO = PHP Data Object
+                                $conn=new PDO("mysql:host=localhost:3306;dbname=sigmacodepro_db;","root","");
+                                
+                                //setting 1 environment variable
+                                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                                $myquerystring="SELECT COUNT(*) as num FROM `accesses` WHERE user_id = $myid;";
+                                
+                                $returnObj = $conn->query($myquerystring);
+                            
+                                if($returnObj->rowCount()==1){
+                                    foreach($returnObj as $row){
+                                        $shared_num = $row['num'];
+                                    }
+                                }
+                            }
+                            catch(PDOException $ex){
+                                
+                            }
+
+                            echo $shared_num;
+                        ?>
+                    </span>
                 </a>
-                <a class="nav-link muted-link" href="#">Shell</a>
-                <a class="nav-link muted-link" href="#">Playground</a>
-                <a class="nav-link muted-link" href="#">Templates</a>
+                <a class="nav-link muted-link" href="shell.php">Shell</a>
+                <a class="nav-link muted-link" href="playground.php">Playground</a>
+                <a class="nav-link muted-link" href="templates.php">Templates</a>
                 
             </div>
         </nav>
@@ -90,7 +144,7 @@ if(
                     </div>
                 </div>
 
-                <div class="home pill-container mt-3">
+                <div class="home pill-container mt-4">
                     <div class="row">
                         <div class="pill-group col col-lg-3">
                             <div class="icon-section">
@@ -114,7 +168,7 @@ if(
                         </div>
 
                         <div class="pill-group col col-lg-3">
-                            <div class="icon-section">
+                            <div class="icon-section" onclick="goTo('shell.php')">
                                 <i class="bi bi-terminal"></i>
                             </div>
                             <div class="text-section">JavaScript Shell</div>
@@ -130,14 +184,14 @@ if(
                         </div>
 
                         <div class="pill-group col col-lg-3">
-                            <div class="icon-section">
+                            <div class="icon-section" onclick="goTo('templates.php')">
                                 <i class="bi bi-body-text"></i>
                             </div>
                             <div class="text-section">Templates</div>
                         </div>
 
                         <div class="pill-group col col-lg-3">
-                            <div class="icon-section">
+                            <div class="icon-section" onclick="goTo('settings.php')">
                                 <i class="bi bi-sliders"></i>
                             </div>
                             <div class="text-section">Settings</div>

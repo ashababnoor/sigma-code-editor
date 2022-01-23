@@ -88,7 +88,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   overflow: hidden;
-  padding: 0.75em;
+  padding: 0.75em 1em;
   color: #f3f3f3f3;
 }
 
@@ -160,6 +160,49 @@
   }
 }
 
+.shell .main-container {
+  overflow: hidden;
+}
+
+.shell .main-container .code-area {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.shell .main-container .col {
+  overflow: hidden;
+  padding: 2em;
+}
+
+.shell .main-container .col .code-area-header {
+  padding: 1em 0em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.shell .main-container .col .code-area-header button {
+  padding: 0.3em 1.5em;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.shell .main-container .col textarea {
+  height: 100px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -185,6 +228,10 @@
   color: #222;
 }
 
+.bg-min-100 {
+  min-height: 100vh;
+}
+
 .muted-link {
   color: #666;
   text-decoration: none;
@@ -205,4 +252,12 @@
 
 .bg-project {
   background: #009245;
+}
+
+.text-white .muted-link {
+  color: #bbb;
+}
+
+.text-white .muted-link:hover, .text-white .muted-link:focus {
+  color: #fff;
 }

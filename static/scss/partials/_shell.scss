@@ -1,0 +1,29 @@
+.shell{
+    .main-container{
+        overflow: hidden;
+        .code-area {
+            display: flex;
+            flex-direction: column;
+        }
+        .col{
+            overflow: hidden;
+            padding: 2em;
+
+            .code-area-header{
+                padding: 1em 0em;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                button{
+                    padding: 0.3em 1.5em;
+                    font-size: 1.2em;
+                    font-weight: bold;
+                }
+            }
+            textarea{
+                height: 100px;
+            }
+        }
+    }
+}

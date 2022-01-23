@@ -4,6 +4,7 @@
 @import './abstracts/functions';
 @import './partials/cover';
 @import './partials/home';
+@import './partials/shell';
 
 
 *{
@@ -30,6 +31,10 @@
     color: #222;
 }
 
+.bg-min-100 {
+    min-height: 100vh;
+}
+
 .muted-link {
     color: #666;
     text-decoration: none;
@@ -50,4 +55,14 @@
 
 .bg-project {
     background: $clr-primary-900;
+}
+
+.text-white {
+    .muted-link {
+        color: #bbb;
+
+        &:hover, &:focus{
+            color: #fff;
+        }
+    }
 }
