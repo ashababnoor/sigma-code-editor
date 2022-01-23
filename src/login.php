@@ -63,7 +63,7 @@ if(
             z-index: 2;
             }
 
-            .form-signin input[type="email"] {
+            .form-signin input[type="text"] {
             margin-bottom: -1px;
             border-bottom-right-radius: 0;
             border-bottom-left-radius: 0;
@@ -127,7 +127,7 @@ if(
             <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" name="myemail" placeholder="name@example.com">
+                <input type="text" class="form-control" id="floatingInput" name="myemail" placeholder="name@example.com">
                 <label for="floatingInput">Email address or username</label>
             </div>
             
