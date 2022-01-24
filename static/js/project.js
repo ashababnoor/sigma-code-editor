@@ -41,7 +41,8 @@ window.onload = () => {
 
 
 function download() {
-    let text=$("#text-editor").text();
+    let text = document.getElementById('text-editor').value;
+    console.log(text);
     let filename = document.getElementById('file').value;
     let extension = document.getElementById('extension').value;
 
@@ -71,17 +72,15 @@ function download() {
 
     let element = document.createElement('a');
     if (filename.search(".html")) {
-        element.setAttribute('href', 'data:html/plain;charset=utf-8,' + encodeURIComponent(text));
-        
+        element.setAttribute('href', 'data:html/plain;charset=utf-8,' + encodeURIComponent(text));  
     }
     else if (filename.search(".php")) {
         element.setAttribute('href', 'data:php/plain;charset=utf-8,' + encodeURIComponent(text));
-        
     }
     else {
         element.setAttribute('href', 'data:txt/plain;charset=utf-8,' + encodeURIComponent(text));
-        
     }
+    
     
     element.setAttribute('download', filename);
     element.style.display = 'none';
