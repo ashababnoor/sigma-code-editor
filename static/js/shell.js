@@ -1,4 +1,6 @@
 let editor;
+let height = "63vh";
+let width = "100%";
 
 window.onload = () => {
     var preferred_theme = "material-darker";
@@ -15,7 +17,7 @@ window.onload = () => {
     // var editorHeight = input.parentElement.clientHeight;
     // console.log(editorHeight);
 
-    editor.setSize("100%", "63vh");
+    editor.setSize(width, height);
     editor.setValue(
         "//Write your code here\n\n"+
         "function hello(){\n"+
@@ -29,7 +31,7 @@ window.onload = () => {
         mode: 'text/plain',
     });
 
-    shell.setSize("100%", "63vh");
+    shell.setSize(width, height);
 
     const [run, clear] = document.querySelectorAll('.execute');
 
@@ -37,9 +39,9 @@ window.onload = () => {
         const codeToRun = editor.getValue();
         
         try{
-            shell.replaceRange('$ ' + eval(`${codeToRun}`) + '\n', CodeMirror.Pos(shell.lastLine()));
+            shell.replaceRange('sigmaCodePro ~/shell \n' + '$ ' + eval(`${codeToRun}`) + '\n\n', CodeMirror.Pos(shell.lastLine()));
         }catch(error){
-            shell.replaceRange('$ ' + error + '\n', CodeMirror.Pos(shell.lastLine()));
+            shell.replaceRange('sigmaCodePro ~/shell \n' + '$ ' + error + '\n\n', CodeMirror.Pos(shell.lastLine()));
         }
         
     });

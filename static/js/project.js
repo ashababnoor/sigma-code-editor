@@ -67,7 +67,6 @@ let pythonExample =
 def hello():
     print("Hello world!")
 
-
 hello()
 `
 
@@ -116,12 +115,9 @@ function changeMode(){
         example = textExample;
     }
 
-    if(filename == ''){
-        filename = "file";
-    }
-
+    // editor.autoLoadMode(editor, extension);
     editor.setValue(example);
-    CodeMirror.autoLoadMode(editor, mode);
+    editor.refresh();
 }
 
 function download(){

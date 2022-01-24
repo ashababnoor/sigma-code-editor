@@ -373,7 +373,7 @@ if(
                                         <option value="htmlmixed" selected>.html</option>
                                         <option value="css">.css</option>
                                         <option value="javascript">.js</option>
-                                        <option value="php">.php</option>
+                                        <!-- <option value="php">.php</option> -->
                                         <option value="python">.py</option>
                                         <option value="text/plain">.txt</option>
                                     </select>
