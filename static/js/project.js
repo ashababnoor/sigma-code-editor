@@ -1,8 +1,10 @@
+let input, editor;
+
 window.onload = () => {
     var preferred_theme = "material-darker";
 
-    const input = document.querySelector('#text-editor');
-    const editor = CodeMirror.fromTextArea(input, {
+    input = document.querySelector('#text-editor');
+    editor = CodeMirror.fromTextArea(input, {
         value: "//write your code here...",
         mode: 'javascript',
         lineNumbers: true,
@@ -37,11 +39,12 @@ window.onload = () => {
     let extension = document.getElementById('extension').value;
     
     editor.setOption("mode", extension);
+
 }
 
 
 function download() {
-    let text = document.getElementById('text-editor').value;
+    let text = editor.getValue();
     console.log(text);
     let filename = document.getElementById('file').value;
     let extension = document.getElementById('extension').value;
@@ -74,8 +77,17 @@ function download() {
     if (filename.search(".html")) {
         element.setAttribute('href', 'data:html/plain;charset=utf-8,' + encodeURIComponent(text));  
     }
+    else if (filename.search(".css")) {
+        element.setAttribute('href', 'data:css/plain;charset=utf-8,' + encodeURIComponent(text));
+    }
+    else if (filename.search(".js")) {
+        element.setAttribute('href', 'data:js/plain;charset=utf-8,' + encodeURIComponent(text));
+    }
     else if (filename.search(".php")) {
         element.setAttribute('href', 'data:php/plain;charset=utf-8,' + encodeURIComponent(text));
+    }
+    else if (filename.search(".py")) {
+        element.setAttribute('href', 'data:py/plain;charset=utf-8,' + encodeURIComponent(text));
     }
     else {
         element.setAttribute('href', 'data:txt/plain;charset=utf-8,' + encodeURIComponent(text));

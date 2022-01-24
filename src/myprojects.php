@@ -139,66 +139,58 @@ if(
                 <div class="d-flex align-items-center p-3 text-white bg-project rounded shadow-sm">
                     <img class="me-3" src="../assets/images/scp-logo-white.svg" alt="" width="48" height="38">
                     <div class="lh-1">
-                    <h1 class="h6 mb-0 text-white lh-1">SigmaCodePro</h1>
-                    <small>Since 2021</small>
+                    <h1 class="h6 mb-0 text-white lh-1">My Projects</h1>
                     </div>
                 </div>
+                
+                <div class="my-3 p-3 bg-body rounded shadow-sm">
+                    <h6 class="border-bottom pb-2 mb-0">Project List</h6>
+                    
+                    <?php
+                        $project_name = "";
+                        $date = "";
+                        
+                        try{
+                            //PDO = PHP Data Object
+                            $conn=new PDO("mysql:host=localhost:3306;dbname=sigmacodepro_db;","root","");
+                            
+                            //setting 1 environment variable
+                            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                <div class="home pill-container mt-4">
-                    <div class="row">
-                        <div class="pill-group col col-lg-3">
-                            <div class="icon-section" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                <i class="bi bi-plus-circle"></i>
-                            </div>
-                            <div class="text-section">Create New Project</div>
-                        </div>
+                            $myquerystring="SELECT * FROM `projects` WHERE owner_id = $myid and is_active = 1;";
+                            
+                            $returnObj = $conn->query($myquerystring);
+                            $returnTable = $returnObj->fetchAll();
+                        
+                            if($returnObj->rowCount() > 0){
+                                foreach($returnTable as $row){
+                                    $project_name = $row['name'];
+                                    $date = $row['time_created'];
 
-                        <div class="pill-group col col-lg-3">
-                            <div class="icon-section" onclick="goTo('myprojects.php')">
-                                <i class="bi bi-folder"></i>
-                            </div>
-                            <div class="text-section">My Projects</div>
-                        </div>
+                                    ?>
 
-                        <div class="pill-group col col-lg-3">
-                            <div class="icon-section">
-                                <i class="bi bi-folder-symlink"></i>
-                            </div>
-                            <div class="text-section">Shared By Others</div>
-                        </div>
+                                    <div class="d-flex text-muted pt-3">
+                                    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
 
-                        <div class="pill-group col col-lg-3">
-                            <div class="icon-section" onclick="goTo('shell.php')">
-                                <i class="bi bi-terminal"></i>
-                            </div>
-                            <div class="text-section">JavaScript Shell</div>
-                        </div>
-                    </div>
+                                    <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
+                                        <div class="d-flex justify-content-between">
+                                        <a href="project.php?projectId=<?php echo $row['id']; ?>"> <strong class="text-gray-dark muted-link"> <?php echo $project_name; ?> </strong> </a>
+                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        </div>
+                                        <span class="d-block">Time Created: <?php echo $date; ?></span>
+                                    </div>
+                                    </div>
 
-                    <div class="row">
-                        <div class="pill-group col col-lg-3">
-                            <div class="icon-section" onclick="goTo('playground.php')">
-                                <i class="bi bi-code-slash"></i>
-                            </div>
-                            <div class="text-section">Code Playground</div>
-                        </div>
-
-                        <div class="pill-group col col-lg-3">
-                            <div class="icon-section" onclick="goTo('templates.php')">
-                                <i class="bi bi-body-text"></i>
-                            </div>
-                            <div class="text-section">Templates</div>
-                        </div>
-
-                        <div class="pill-group col col-lg-3">
-                            <div class="icon-section" onclick="goTo('settings.php')">
-                                <i class="bi bi-sliders"></i>
-                            </div>
-                            <div class="text-section">Settings</div>
-                        </div>
-                    </div>
+                                    <?php
+                                }
+                            }
+                        }
+                        catch(PDOException $ex){
+                            
+                        }
+                    ?>
                 </div>
-            </div>
+                
         </main>
 
         

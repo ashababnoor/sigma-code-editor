@@ -48,7 +48,7 @@ if(
                 $current_user_is_owner = true;
             }
             else if($second_returnobj->rowCount()==0){
-                $third_querystring="SELECT COUNT(*) as num FROM `accesses` WHERE user_id = $myid and is_active = 1; and project_id = $projectId";
+                $third_querystring="SELECT * FROM `accesses` WHERE user_id = $userId and is_active = 1; and project_id = $projectId";
 
                 $third_returnobj = $conn->query($third_querystring);
 
@@ -306,7 +306,7 @@ if(
                     ?>
                         <div class="main-container">
                             <div class=" p-3 bg-white" style="width: 280px;">
-                                <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+                                <a href="" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
                                 <span class="fs-5 fw-semibold"><?php echo $project_name ?></span>
                                 </a>
                                 <!-- 
@@ -401,7 +401,7 @@ if(
                                 <p class="mb-0">Please make sure you have the correct link and come back. In the meantime, you can go back home.</p>
 
                                 <div class="d-flex flex-row-reverse">
-                                    <button class="btn btn-danger mt-3">Go Home</button>
+                                    <button class="btn btn-danger mt-3" onclick="goTo('home.php')">Go Home</button>
                                 </div>
                             </div>
                         </main>
@@ -477,7 +477,7 @@ if(
                                 <p class="mb-0">Please make sure you have the proper access and come back. In the meantime, you can go back home.</p>
 
                                 <div class="d-flex flex-row-reverse">
-                                    <button class="btn btn-warning mt-3">Go Home</button>
+                                    <button class="btn btn-warning mt-3" onclick="goTo('home.php')">Go Home</button>
                                 </div>
                             </div>
                         </main>
