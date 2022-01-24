@@ -139,12 +139,12 @@ if(
                 <div class="d-flex align-items-center p-3 text-white bg-project rounded shadow-sm">
                     <img class="me-3" src="../assets/images/scp-logo-white.svg" alt="" width="48" height="38">
                     <div class="lh-1">
-                    <h1 class="h6 mb-0 text-white lh-1">My Projects</h1>
+                    <h1 class="h6 mb-0 text-white lh-1">Shared By Others</h1>
                     </div>
                 </div>
                 
                 <div class="my-3 p-3 bg-body rounded shadow-sm">
-                    <h6 class="border-bottom pb-2 mb-0">Project List</h6>
+                    <h6 class="border-bottom pb-2 mb-0">Shared Project List</h6>
                     
                     <?php
                         $project_name = "";
@@ -167,7 +167,7 @@ if(
                                     $project_name = $row['name'];
                                     $date = $row['time_created'];
                                     $project_id = $row['id'];
-
+                                    
                                     $formatted_date = strtotime($date);
                                     ?>
 
@@ -178,9 +178,9 @@ if(
                                     <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
                                         <div class="d-flex justify-content-between">
                                         <a href="project.php?projectId=<?php echo $project_id; ?>" class="text-decoration-none text-success flex-grow-1"> <strong class="text-gray-dark"> <?php echo $project_name; ?> </strong> </a>
-                                        <button class="btn btn-sm btn-outline-success mx-2" data-bs-toggle="modal" data-bs-target="#shareModal" data-bs-project="<?php echo $project_id; ?>">Share</button>
-                                        <button class="btn btn-sm btn-outline-danger" onclick="deletefn(<?php echo $project_id; ?>, 'projects')">Delete</button>
+                                        <button class="btn btn-sm btn-outline-danger" onclick="">Remove Access</button>
                                         </div>
+                                        <span class="d-block mb-1">Created by <strong>@shabab</strong></span>
                                         <span class="d-block">Created on: <?php echo date('d M, Y, h:i A', $formatted_date); ?></span>
                                     </div>
                                     </div>
@@ -222,36 +222,6 @@ if(
             </div>
         </div>
         <!-- Modal End -->
-
-        <!-- Modal for sharing project -->
-        <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered text-dark">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="shareModalLabel">Share With Others</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" name="" id="">
-                    
-                    <div class="form-group" style="margin-bottom: 2rem;">
-                        <label for="name" class="col-form-label">Search for users</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="username" name="username" autocomplete="off" placeholder="Username">
-                            <span class="input-group-text"> <i class="bi bi-search"></i> </span>
-                        </div>
-                        <input type="hidden" name="projectId">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success">Share</button>
-                </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal End -->
-        
 
 
         <!-- Footer Start -->

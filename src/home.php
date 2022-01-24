@@ -162,7 +162,7 @@ if(
 
                         <div class="pill-group col col-lg-3">
                             <div class="icon-section">
-                                <i class="bi bi-folder-symlink"></i>
+                                <i class="bi bi-folder-symlink" onclick="goTo('shared.php')"></i>
                             </div>
                             <div class="text-section">Shared By Others</div>
                         </div>
