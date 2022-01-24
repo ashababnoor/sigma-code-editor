@@ -77,7 +77,7 @@ if(
                                 //setting 1 environment variable
                                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                                $myquerystring="SELECT COUNT(*) as num FROM `projects` WHERE owner_id = $myid;";
+                                $myquerystring="SELECT COUNT(*) as num FROM `projects` WHERE owner_id = $myid and is_active = 1;";
                                 
                                 $returnObj = $conn->query($myquerystring);
                             

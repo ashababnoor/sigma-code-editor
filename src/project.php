@@ -227,7 +227,7 @@ if(
                                 //setting 1 environment variable
                                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                                $myquerystring="SELECT COUNT(*) as num FROM `projects` WHERE owner_id = $myid;";
+                                $myquerystring="SELECT COUNT(*) as num FROM `projects` WHERE owner_id = $myid and is_active = 1;";
                                 
                                 $returnObj = $conn->query($myquerystring);
                             
@@ -279,10 +279,6 @@ if(
                 <a class="nav-link muted-link active" href="shell.php">Shell</a>
                 <a class="nav-link muted-link" href="playground.php">Playground</a>
                 <a class="nav-link muted-link" href="templates.php">Templates</a>
-                
-                <div class="flex-grow-1">
-                    <a class="nav-link muted-link" href="">Download</a>
-                </div>
             </div>
             
         </nav>

@@ -1,8 +1,10 @@
+let editor;
+
 window.onload = () => {
     var preferred_theme = "material-darker";
 
     const [input, output] = document.querySelectorAll('.codemirror-textarea');
-    const editor = CodeMirror.fromTextArea(input, {
+    editor = CodeMirror.fromTextArea(input, {
         value: "//write your code here...",
         mode: 'javascript',
         lineNumbers: true,
@@ -44,4 +46,10 @@ window.onload = () => {
         shell.setValue("");
     });
 
+}
+
+function download(){
+    let text = editor.getValue();
+
+    downloadBase(text, 'script', 'javascript');
 }

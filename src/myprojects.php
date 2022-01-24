@@ -2,7 +2,7 @@
 
 session_start();
 
-$_SESSION['current_page'] = 'home.php';
+$_SESSION['current_page'] = 'myprojects.php';
 
 if(
     isset($_SESSION['myemail']) &&
@@ -77,7 +77,7 @@ if(
                                 //setting 1 environment variable
                                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                                $myquerystring="SELECT COUNT(*) as num FROM `projects` WHERE owner_id = $myid;";
+                                $myquerystring="SELECT COUNT(*) as num FROM `projects` WHERE owner_id = $myid and is_active = 1;";
                                 
                                 $returnObj = $conn->query($myquerystring);
                             
@@ -166,16 +166,18 @@ if(
                                 foreach($returnTable as $row){
                                     $project_name = $row['name'];
                                     $date = $row['time_created'];
+                                    $project_id = $row['id'];
 
                                     ?>
 
                                     <div class="d-flex text-muted pt-3">
-                                    <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                                    <!-- <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#22b573"/><text x="50%" y="50%" fill="#22b573" dy=".3em">32x32</text></svg> -->
+                                    <i class="bi bi-journal-code mx-3" style="font-size: 1.85rem;"></i>
 
                                     <div class="pb-3 mb-0 small lh-sm border-bottom w-100">
                                         <div class="d-flex justify-content-between">
-                                        <a href="project.php?projectId=<?php echo $row['id']; ?>"> <strong class="text-gray-dark muted-link"> <?php echo $project_name; ?> </strong> </a>
-                                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                                        <a href="project.php?projectId=<?php echo $project_id; ?>" class="text-decoration-none text-success"> <strong class="text-gray-dark"> <?php echo $project_name; ?> </strong> </a>
+                                        <button class="btn btn-sm btn-outline-danger" onclick="deletefn(<?php echo $project_id; ?>, 'projects')">Delete</button>
                                         </div>
                                         <span class="d-block">Time Created: <?php echo $date; ?></span>
                                     </div>
