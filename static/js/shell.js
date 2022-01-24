@@ -26,6 +26,7 @@ window.onload = () => {
     const shell = CodeMirror.fromTextArea(output, {
         lineNumbers: false,
         theme: preferred_theme,
+        mode: 'text/plain',
     });
 
     shell.setSize("100%", "63vh");

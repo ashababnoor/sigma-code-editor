@@ -369,13 +369,13 @@ if(
                                     <span class="input-group-text">File name</span>
                                     <input type="text" class="form-control" id="file" placeholder="file name" aria-label="file name">
                                     <span class="input-group-text">Extension</span>
-                                    <select class="form-select" id="extension">
+                                    <select class="form-select" id="extension" onchange="changeMode()">
                                         <option value="htmlmixed" selected>.html</option>
                                         <option value="css">.css</option>
                                         <option value="javascript">.js</option>
                                         <option value="php">.php</option>
                                         <option value="python">.py</option>
-                                        <option value="text">.txt</option>
+                                        <option value="text/plain">.txt</option>
                                     </select>
                                     <button class="btn btn-success">Save</button>
                                     <button class="btn btn-warning" onclick="download()">Download</button>

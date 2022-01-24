@@ -1,26 +1,8 @@
 let input, editor;
 
-window.onload = () => {
-    var preferred_theme = "material-darker";
+let htmlExample = 
+`<!-- Write your HTML code here  -->
 
-    input = document.querySelector('#text-editor');
-    editor = CodeMirror.fromTextArea(input, {
-        value: "//write your code here...",
-        mode: 'javascript',
-        lineNumbers: true,
-        theme: preferred_theme,
-        autoCloseTags: true,
-        extraKeys: {"Ctrl-Space": "autocomplete",
-                    "Alt-F": "findPersistent"},
-    });
-
-    // var editorHeight = input.parentElement.clientHeight;
-    // console.log(editorHeight);
-
-    editor.setSize("100%", "100%");
-    editor.setValue(
-        "<!-- Write your code here  -->\n"+
-`
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -34,72 +16,113 @@ window.onload = () => {
     </body>
 </html>
 `
-    );
 
-    let extension = document.getElementById('extension').value;
-    
-    editor.setOption("mode", extension);
+let cssExample = 
+`/* Write your CSS code here */
 
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+}
+  
+:root {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
+--clr-primary: #008e98;
+--clr-secondary: #0fd0b3; 
+`
 
-// function download() {
-//     let text = editor.getValue();
-//     console.log(text);
-//     let filename = document.getElementById('file').value;
-//     let extension = document.getElementById('extension').value;
+let jsExample = 
+`//Write your Javascript code here
 
-//     if(extension == 'htmlmixed'){
-//         extension = '.html';
-//     }
-//     else if(extension == 'python'){
-//         extension = '.py';
-//     }
-//     else if(extension == 'css'){
-//         extension = '.css';
-//     }
-//     else if(extension == 'javascript'){
-//         extension = '.js';
-//     }
-//     else if(extension == 'php'){
-//         extension = '.php';
-//     }else{
-//         extension = '.txt';
-//     }
+let text = "Hello world!";
 
-//     if(filename == ''){
-//         filename = "file";
-//     }
+function hello(){
+	return text;
+}
 
-//     filename += extension;
+console.log(text);
+`
 
-//     let element = document.createElement('a');
-//     if (filename.search(".html")) {
-//         element.setAttribute('href', 'data:html/plain;charset=utf-8,' + encodeURIComponent(text));  
-//     }
-//     else if (filename.search(".css")) {
-//         element.setAttribute('href', 'data:css/plain;charset=utf-8,' + encodeURIComponent(text));
-//     }
-//     else if (filename.search(".js")) {
-//         element.setAttribute('href', 'data:js/plain;charset=utf-8,' + encodeURIComponent(text));
-//     }
-//     else if (filename.search(".php")) {
-//         element.setAttribute('href', 'data:php/plain;charset=utf-8,' + encodeURIComponent(text));
-//     }
-//     else if (filename.search(".py")) {
-//         element.setAttribute('href', 'data:py/plain;charset=utf-8,' + encodeURIComponent(text));
-//     }
-//     else {
-//         element.setAttribute('href', 'data:txt/plain;charset=utf-8,' + encodeURIComponent(text));
-//     }
+let textExample =
+`You can write any text you want in this editor.
+`
+
+let phpExample =
+`<?php
+
+//Write your PHP code here
+
+echo "Hello world!";
+
+?>
+`
+
+let pythonExample = 
+`#Write your Python code here
+
+def hello():
+    print("Hello world!")
+
+
+hello()
+`
+
+
+window.onload = () => {
+    var preferred_theme = "material-darker";
+
+    input = document.querySelector('#text-editor');
+    editor = CodeMirror.fromTextArea(input, {
+        value: "//write your code here...",
+        mode: 'htmlmixed',
+        lineNumbers: true,
+        theme: preferred_theme,
+        autoCloseTags: true,
+        extraKeys: {"Ctrl-Space": "autocomplete",
+                    "Alt-F": "findPersistent"},
+    });
+
+    // var editorHeight = input.parentElement.clientHeight;
+    // console.log(editorHeight);
+
+    editor.setSize("100%", "100%");
+    editor.setValue(htmlExample);
+}
+
+function changeMode(){
+    let extension = document.getElementById('extension').value;
+    editor.setOption("mode", extension);
     
-    
-//     element.setAttribute('download', filename);
-//     element.style.display = 'none';
-//     document.body.appendChild(element);
-//     element.click();
-//     document.body.removeChild(element);
-// }
+    let example = '';
+    if(extension == 'htmlmixed'){
+        example = htmlExample;
+    }
+    else if(extension == 'python'){
+        example = pythonExample;
+    }
+    else if(extension == 'css'){
+        example = cssExample;
+    }
+    else if(extension == 'javascript'){
+        example = jsExample;
+    }
+    else if(extension == 'php'){
+        example = phpExample;
+    }else{
+        example = textExample;
+    }
+
+    if(filename == ''){
+        filename = "file";
+    }
+
+    editor.setValue(example);
+    CodeMirror.autoLoadMode(editor, mode);
+}
 
 function download(){
     let text = editor.getValue();
