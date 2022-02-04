@@ -60,7 +60,13 @@ if(
         <!-- External JS File -->
         <script type="text/javascript" src="../static/js/script.js"></script>
 
-        <title>Home | SigmaCodePro</title>
+        <title>Settings | SigmaCodePro</title>
+
+        <style>
+            .instruction-list{
+                list-style-type: '- ';
+            }
+        </style>
     </head>
 
     <body class="bg-dark text-light">
@@ -171,14 +177,11 @@ if(
                     </div>
                 </div>
 
-                <form action="saveChanges.php" method="post" class="row mt-3 g-3 needs-validation" novalidate>
+                <form action="saveChanges.php" method="post" class="row my-3 g-3 needs-validation" novalidate id="settings-form">
                     <div class="col-md-4">
                         <div class="input-group has-validation">
                             <span class="input-group-text" id="inputGroupPrepend">First Name</span>
                             <input type="text" class="form-control" id="myfirstname" name="myfirstname" placeholder="First name" required value="<?php echo $first_name; ?>">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
                             <div class="invalid-feedback">
                                 Please choose a valid first name.
                             </div>
@@ -188,9 +191,6 @@ if(
                         <div class="input-group has-validation">
                             <span class="input-group-text" id="inputGroupPrepend">Last Name</span>
                             <input type="text" class="form-control" id="mylastname" name="mylastname" placeholder="Last name" required value="<?php echo $last_name; ?>">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
                             <div class="invalid-feedback">
                                 Please choose a valid last name.
                             </div>
@@ -200,9 +200,6 @@ if(
                         <div class="input-group has-validation">
                             <span class="input-group-text" id="inputGroupPrepend">@</span>
                             <input type="text" class="form-control" id="username" name="username" placeholder="Username" required value="<?php echo $username; ?>">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
                             <div class="invalid-feedback">
                                 Please choose a valid username.
                             </div>
@@ -213,9 +210,6 @@ if(
                         <div class="input-group has-validation">
                             <span class="input-group-text" id="inputGroupPrepend">Email</span>
                             <input type="email" class="form-control" id="myemail" name="myemail" placeholder="Email" required value="<?php echo $email; ?>">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
                             <div class="invalid-feedback">
                                 Please choose a valid email.
                             </div>
@@ -223,39 +217,34 @@ if(
                     </div>
                     <div class="col-md-6">
                         <div class="input-group has-validation">
-                            <span class="input-group-text">Old Password</span>
-                            <input type="password" class="form-control" id="old_mypass" name="old_mypass" placeholder="Old password" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                            <span class="input-group-text">Current Password</span>
+                            <input type="password" class="form-control" id="old_mypass" name="old_mypass" placeholder="Current password" required>
                             <div class="invalid-feedback">
-                                Please choose a valid password.
+                                Please enter your current password.
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="input-group has-validation">
+                        <div class="input-group has-validation" id="pass_div">
                             <span class="input-group-text">New Password</span>
-                            <input type="password" class="form-control" id="mypass" name="mypass" placeholder="New password" required onkeyup="checkPass()">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                            <input type="password" class="form-control" id="mypass" name="mypass" placeholder="New password" onkeyup="checkPass()">
+                            
                             <div class="invalid-feedback">
                                 Please choose a valid password.
-                            </div>
+                            </div> 
+                            
                         </div>
                     </div>
                     <div class="col-md-6" id="mypassval-div">
-                        <div class="input-group has-validation">
+                        <div class="input-group " id="repass_div">
                             <span class="input-group-text">Re-type Password</span>
-                            <input type="password" class="form-control" id="mypassval" placeholder="Re-type new password"  required onkeyup="checkPass()">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                            <input type="password" class="form-control" id="mypassval" placeholder="Re-type new password" onkeyup="checkPass()">
+                            
                             <div class="invalid-feedback">
                                 Please provide the correct password.
-                            </div>
+                            </div> 
+                            
                         </div>
                     </div>
 
@@ -263,18 +252,25 @@ if(
                         <div class="input-group has-validation">
                             <span class="input-group-text">Date of Birth</span>
                             <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of birth" required value="<?php echo date('Y-m-d', $dob); ?>">
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
                             <div class="invalid-feedback">
                                 Please choose a valid date.
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <button class="w-100 btn btn-outline-primary" type="submit">Save Changes</button>                                          
+                        <button class="w-100 btn btn-outline-warning" type="submit">Save Changes</button>                                          
                     </div>
                 </form>
+
+                <div class="alert alert-warning mt-5 mb-0" role="alert">
+                    <h4><code>Instructions:</code></h4>
+                    <hr>
+                    <ul class="instruction-list">
+                        <li> <samp> Enter current password to save changes.</samp> </li>
+                        <li> <samp> Leave <em>New Password</em> and <em>Re-type Password</em> fields empty if you don't wish to change password. </samp> </li>
+                        <li> <samp> Both <em>New Password</em> and <em>Re-type Password</em> fields must have the same value for password to be updated. </samp> </li>
+                    </ul>
+                </div>
             </div>
 
             <?php 
@@ -409,6 +405,94 @@ if(
                 let location_string = 'createProject.php?name=' + name;
                 location.assign(location_string);
             }
+        </script>
+
+        <script>
+            let pass_div = document.getElementById('pass_div');
+            let repass_div = document.getElementById('repass_div');
+
+            let old_passdiv_content = pass_div.innerHTML;
+            let old_repassdiv_content = repass_div.innerHTML;
+
+            function checkPass(){
+                let pass = document.getElementById('mypass').value;
+                let passval = document.getElementById('mypassval').value;
+
+                let pass_field = document.getElementById('mypass');
+                let passval_field = document.getElementById('mypassval');
+
+                let form = document.getElementById('settings-form');
+
+                if(passval != "" || true){
+                    // pass_div.innerHTML += `
+                    //     <div class="valid-feedback">
+                    //         Looks good!
+                    //     </div>
+                    //     <div class="invalid-feedback">
+                    //         Please choose a valid password.
+                    //     </div>
+                    // `;
+                    // repass_div.innerHTML += `
+                    //     <div class="valid-feedback">
+                    //         Looks good!
+                    //     </div>
+                    //     <div class="invalid-feedback">
+                    //         Please provide the correct password.
+                    //     </div> 
+                    // `;
+
+                    if(pass != passval){
+                        form.classList.remove('was-validated');
+
+                        if(pass == ''){
+                            pass_field.classList.add('is-invalid');
+                            pass_field.classList.remove('is-valid');
+                        }
+                        
+                        passval_field.classList.add('is-invalid');
+                        passval_field.classList.remove('is-valid');
+                    }
+                    else if(pass != "" || (pass == '' && passval  == '')){
+                        form.classList.remove('was-validated');
+
+                        pass_field.classList.add('is-valid');
+                        pass_field.classList.remove('is-invalid');
+
+                        passval_field.classList.add('is-valid');
+                        passval_field.classList.remove('is-invalid');
+
+                        if (pass == '' && passval  == ''){
+                            form.classList.remove('was-validated');
+                        }
+                    }
+                }
+                else{
+                    // pass_div.innerHTML = old_passdiv_content;
+                    // repass_div.innerHTML = old_repassdiv_content;
+                }
+            }
+            // Starter JavaScript for disabling form submissions if there are invalid fields
+            (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    let pass = document.getElementById('mypass').value;
+                    let passval = document.getElementById('mypassval').value;
+
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    form.classList.add('was-validated');
+                }, false);
+                });
+            }, false);
+            })();
         </script>
     </body>
     </html>
