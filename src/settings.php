@@ -2,7 +2,36 @@
 
 session_start();
 
-$_SESSION['current_page'] = 'home.php';
+$_SESSION['current_page'] = 'settings.php';
+$is_admin = $_SESSION['is_admin'];
+$myid = $_SESSION['myid'];
+
+try{
+    //PDO = PHP Data Object
+    $conn=new PDO("mysql:host=localhost:3306;dbname=sigmacodepro_db;","root","");
+    
+    //setting 1 environment variable
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $myquerystring="SELECT * FROM `users` WHERE id = $myid and is_active = 1;";
+    
+    $returnObj = $conn->query($myquerystring);
+
+    if($returnObj->rowCount()==1){
+        foreach($returnObj as $row){
+            $first_name = $row['first_name'];
+            $last_name = $row['last_name'];
+            $username = $row['username'];
+            $email = $row['email'];
+            $dob = $row['dob'];
+
+            $dob = strtotime($dob);
+        }
+    }
+}
+catch(PDOException $ex){
+    
+}
 
 if(
     isset($_SESSION['myemail']) &&
@@ -69,7 +98,6 @@ if(
                     <span class="badge bg-success-light text-success rounded-pill align-text-bottom">
                         <?php
                             $project_num = 0;
-                            $myid = $_SESSION['myid'];
                             try{
                                 //PDO = PHP Data Object
                                 $conn=new PDO("mysql:host=localhost:3306;dbname=sigmacodepro_db;","root","");
@@ -135,42 +163,152 @@ if(
         <!-- Navbar End -->
 
         <main class="bg-white-100">
-            <div class="container-xl p-5">
+            <div class="container-xl p-5 pb-0">
                 <div class="d-flex align-items-center p-3 text-white bg-project rounded shadow-sm">
                     <img class="me-3" src="../assets/images/scp-logo-white.svg" alt="" width="48" height="38">
                     <div class="lh-1">
                     <h1 class="h6 mb-0 text-white lh-1">General Settings</h1>
                     </div>
                 </div>
-            </div>
 
-
-            <div class="container-xl p-5">
-                <div class="d-flex align-items-center p-3 text-white bg-project rounded shadow-sm">
-                    <img class="me-3" src="../assets/images/scp-logo-white.svg" alt="" width="48" height="38">
-                    <div class="lh-1">
-                    <h1 class="h6 mb-0 text-white lh-1">Admin Settings</h1>
-                    </div>
-                </div>
-
-                <div class="home pill-container mt-4">
-                    <div class="row">
-                        <div class="pill-group col col-lg-3">
-                            <div class="icon-section" onclick="goTo('playground.php')">
-                                <i class="bi bi-code-slash"></i>
+                <form action="saveChanges.php" method="post" class="row mt-3 g-3 needs-validation" novalidate>
+                    <div class="col-md-4">
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend">First Name</span>
+                            <input type="text" class="form-control" id="myfirstname" name="myfirstname" placeholder="First name" required value="<?php echo $first_name; ?>">
+                            <div class="valid-feedback">
+                                Looks good!
                             </div>
-                            <div class="text-section">User Management</div>
-                        </div>
-
-                        <div class="pill-group col col-lg-3">
-                            <div class="icon-section" onclick="goTo('templates.php')">
-                                <i class="bi bi-body-text"></i>
+                            <div class="invalid-feedback">
+                                Please choose a valid first name.
                             </div>
-                            <div class="text-section">Public Templates</div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-md-4">
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend">Last Name</span>
+                            <input type="text" class="form-control" id="mylastname" name="mylastname" placeholder="Last name" required value="<?php echo $last_name; ?>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a valid last name.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend">@</span>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" required value="<?php echo $username; ?>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a valid username.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="input-group has-validation">
+                            <span class="input-group-text" id="inputGroupPrepend">Email</span>
+                            <input type="email" class="form-control" id="myemail" name="myemail" placeholder="Email" required value="<?php echo $email; ?>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a valid email.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group has-validation">
+                            <span class="input-group-text">Old Password</span>
+                            <input type="password" class="form-control" id="old_mypass" name="old_mypass" placeholder="Old password" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a valid password.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="input-group has-validation">
+                            <span class="input-group-text">New Password</span>
+                            <input type="password" class="form-control" id="mypass" name="mypass" placeholder="New password" required onkeyup="checkPass()">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a valid password.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6" id="mypassval-div">
+                        <div class="input-group has-validation">
+                            <span class="input-group-text">Re-type Password</span>
+                            <input type="password" class="form-control" id="mypassval" placeholder="Re-type new password"  required onkeyup="checkPass()">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please provide the correct password.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="input-group has-validation">
+                            <span class="input-group-text">Date of Birth</span>
+                            <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of birth" required value="<?php echo date('Y-m-d', $dob); ?>">
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please choose a valid date.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="w-100 btn btn-outline-primary" type="submit">Save Changes</button>                                          
+                    </div>
+                </form>
             </div>
+
+            <?php 
+            if($is_admin){
+                ?>
+                    <div class="container-xl p-5">
+                        <div class="d-flex align-items-center p-3 text-white bg-project rounded shadow-sm">
+                            <img class="me-3" src="../assets/images/scp-logo-white.svg" alt="" width="48" height="38">
+                            <div class="lh-1">
+                            <h1 class="h6 mb-0 text-white lh-1">Admin Settings</h1>
+                            </div>
+                        </div>
+
+                        <div class="home pill-container mt-4 mb-5">
+                            <div class="row">
+                                <div class="pill-group col col-lg-3">
+                                    <div class="icon-section" onclick="goTo('userList.php')">
+                                        <i class="bi bi-people"></i>
+                                    </div>
+                                    <div class="text-section">User Management</div>
+                                </div>
+
+                                <div class="pill-group col col-lg-3">
+                                    <div class="icon-section" onclick="goTo('publicTemplates.php')">
+                                        <i class="bi bi-body-text"></i>
+                                    </div>
+                                    <div class="text-section">Public Templates</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+            }
+            ?>
         </main>
 
         

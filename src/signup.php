@@ -146,7 +146,7 @@ if(
 
             <div class="col-12">
                 <div class="input-group has-validation">
-                    <span class="input-group-text">Date of birth</span>
+                    <span class="input-group-text">Date of Birth</span>
                     <input type="date" class="form-control" id="dob" name="dob" placeholder="Date of birth" required>
                     <div class="valid-feedback">
                         Looks good!

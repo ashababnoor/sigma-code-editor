@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
                     $_SESSION['myfirstname'] = $row['first_name'];
                     $_SESSION['mylastname'] = $row['last_name'];
                     $_SESSION['username'] = $row['username'];
+                    $_SESSION['is_admin'] = $row['is_admin'];
                 }
                 
                 //if everything is ok, we will be taken to homepage
